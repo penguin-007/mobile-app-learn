@@ -18,11 +18,16 @@ class SecondActivity:Activity() {
         findViewById<Button>(R.id.text_btn).setOnClickListener {
             val newStr = inputText.text.toString()
             val i = Intent()
+
+            // экстра данные отправляем другому активити
             i.putExtra("text2", newStr)
+
+            // ???
             setResult(0, i)
             finish()
         }
 
+        // получение экстра данных из активити
         val str = intent.getStringExtra("text")
 
         inputText.setText(str)
