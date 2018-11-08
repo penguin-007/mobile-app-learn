@@ -39,7 +39,8 @@ export class HomeComponent implements OnInit {
 
     showToken() {
         this.UserService.userGetData(this.token).subscribe(result => {
-            console.log("token", result);
+            console.log("token", result['body']);
+            alert(result['body'].results.name);
         }, error => {
             console.log("showToken error", error);
         });
