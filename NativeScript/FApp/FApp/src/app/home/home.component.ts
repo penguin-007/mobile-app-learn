@@ -1,15 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+import { UserService } from "../shared/user/user.service";
 
 @Component({
     selector: "Home",
     moduleId: module.id,
-    templateUrl: "./home.component.html"
+    providers: [UserService],
+    templateUrl: "./home.component.html",
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
 
-    constructor() {
+
+    constructor(private UserService: UserService) {
         // Use the component constructor to inject providers.
     }
 
@@ -20,5 +24,13 @@ export class HomeComponent implements OnInit {
     onDrawerButtonTap(): void {
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.showDrawer();
+    }
+
+    login() {
+        this.UserService.login().subscribe(result => {
+            console.log("token", result['body'].token);
+        }, error => {
+
+        });
     }
 }

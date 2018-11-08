@@ -15,9 +15,11 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<GridLayout class="page page-content">
-    <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here2 -->"></Label>
-    <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text="<!-- Page cфцвontent goes here2 -->"></Label>
-</GridLayout>
+<FlexboxLayout>
+    <StackLayout class="form" >
+        <Button class="btn btn-primary" text="Login" (tap)="login()"></Button>
+
+        <TextField hint="Password" secure="true" 
+            class="input input-border"></TextField>
+    </StackLayout>
+</FlexboxLayout>
