@@ -12,6 +12,8 @@ import { UserService } from "../shared/user/user.service";
 })
 export class HomeComponent implements OnInit {
 
+    protected token;
+
 
     constructor(private UserService: UserService) {
         // Use the component constructor to inject providers.
@@ -29,8 +31,17 @@ export class HomeComponent implements OnInit {
     login() {
         this.UserService.login().subscribe(result => {
             console.log("token", result['body'].token);
+            this.token = result['body'].token.token;
         }, error => {
 
+        });
+    }
+
+    showToken() {
+        this.UserService.userGetData(this.token).subscribe(result => {
+            console.log("token", result);
+        }, error => {
+            console.log("showToken error", error);
         });
     }
 }
