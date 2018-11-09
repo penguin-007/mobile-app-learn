@@ -16,7 +16,7 @@ import { NativeScriptHttpModule } from "nativescript-angular/http";
         AppRoutingModule,
         NativeScriptModule,
         NativeScriptUISideDrawerModule,
-        NativeScriptHttpModule
+        NativeScriptHttpModule,
     ],
     declarations: [
         AppComponent,
