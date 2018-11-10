@@ -5,6 +5,8 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
+import * as appSettings from "tns-core-modules/application-settings";
+
 @Component({
     moduleId: module.id,
     selector: "ns-app",
@@ -13,6 +15,8 @@ import * as app from "tns-core-modules/application";
 export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
+
+    userName;
 
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject services.
@@ -25,9 +29,14 @@ export class AppComponent implements OnInit {
         this.router.events
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
+
+        
+        console.log('nav', 'ngOnInit');
+        this.userName = appSettings.getString("Name", "NoName");
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
+        console.log('nav', 'sideDrawerTransition');
         return this._sideDrawerTransition;
     }
 
@@ -36,6 +45,7 @@ export class AppComponent implements OnInit {
     }
 
     onNavItemTap(navItemRoute: string): void {
+        console.log('nav', 'onNavItemTap');
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
                 name: "fade"
@@ -44,5 +54,10 @@ export class AppComponent implements OnInit {
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
+    }
+
+    exitFromApp() {
+        // Removes all values.
+        appSettings.clear();
     }
 }
