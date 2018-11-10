@@ -17,9 +17,6 @@ StackLayout {
     margin-bottom: 20;
     height: 60;
   }
-  TextField {
-    margin-bottom: 10;
-  }
   .btn-login {
     background-color: #4ec256;
     margin-left: 0;
@@ -28,7 +25,7 @@ StackLayout {
     color: #fff;
   }
   TextField {
-    background-color: #fff;
     placeholder-color: #ccc;
     color: black;
+    margin-bottom: 10;
   }
