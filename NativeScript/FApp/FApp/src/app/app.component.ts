@@ -30,13 +30,11 @@ export class AppComponent implements OnInit {
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
-        
-        console.log('nav', 'ngOnInit');
         this.userName = appSettings.getString("Name", "NoName");
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
-        console.log('nav', 'sideDrawerTransition');
+        // console.log('nav', 'sideDrawerTransition');
         return this._sideDrawerTransition;
     }
 
@@ -45,7 +43,7 @@ export class AppComponent implements OnInit {
     }
 
     onNavItemTap(navItemRoute: string): void {
-        console.log('nav', 'onNavItemTap');
+        // console.log('nav', 'onNavItemTap');
         this.routerExtensions.navigate([navItemRoute], {
             transition: {
                 name: "fade"
