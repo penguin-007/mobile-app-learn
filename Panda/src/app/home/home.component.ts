@@ -9,7 +9,8 @@ import * as app from "tns-core-modules/application";
 })
 export class HomeComponent implements OnInit {
 
-    constructor() {
+    constructor(
+    ) {
         // Use the component constructor to inject providers.
     }
 

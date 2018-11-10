@@ -7,6 +7,8 @@ import * as app from "tns-core-modules/application";
 
 import * as appSettings from "tns-core-modules/application-settings";
 
+import { UserService } from "./shared/user/user.service";
+
 @Component({
     moduleId: module.id,
     selector: "ns-app",
@@ -16,9 +18,17 @@ export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
+    // user data
+    name;
     email;
 
-    constructor(private router: Router, private routerExtensions: RouterExtensions) {
+    protected token = '5602021ae760ac1f3b3307f74f5ff522';
+
+    constructor(
+        private router: Router,
+        private routerExtensions: RouterExtensions,
+        private userService: UserService
+    ) {
         // Use the component constructor to inject services.
     }
 
@@ -30,8 +40,10 @@ export class AppComponent implements OnInit {
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
-        // get user data
-        this.email = appSettings.getString("email");
+        // get token
+        // this.email = appSettings.getString("token");
+
+        this.getUserData(this.token);
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -56,5 +68,20 @@ export class AppComponent implements OnInit {
     exitFromApp() {
         // Removes all values.
         appSettings.clear();
+    }
+
+    // get user data by token
+    getUserData(token) {
+        this.userService.userGetData(token).subscribe(result => {
+            if (result['body'] !== undefined) {
+                // console.log("getUserData", result['body']);
+                this.name  = result['body'].results.name ? result['body'].results.name : '';
+                this.email = result['body'].results.email ? result['body'].results.email : '';
+            } else {
+                console.warn("getUserData", 'noData');
+            }
+        }, error => {
+            console.log("showToken error", error);
+        });
     }
 }
