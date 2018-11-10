@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
     private _activatedUrl: string;
     private _sideDrawerTransition: DrawerTransitionBase;
 
+    email;
+
     constructor(private router: Router, private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject services.
     }
@@ -27,6 +29,9 @@ export class AppComponent implements OnInit {
         this.router.events
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
+
+        // get user data
+        this.email = appSettings.getString("email");
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
