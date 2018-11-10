@@ -1,10 +1,12 @@
 <FlexboxLayout>
-    <StackLayout class="form" [class.dark]="!isLoggingIn">
+    <StackLayout class="form" >
+        <Image src="~/app/images/logo.png"></Image>
+
         <TextField hint="Email Address" keyboardType="email" autocorrect="false"
             autocapitalizationType="none" [(ngModel)]="email" class="input input-border"></TextField>
         <TextField hint="Password" secure="true" [(ngModel)]="password"
             class="input input-border"></TextField>
 
-        <Button text="Login" class="btn btn-primary" (tap)="submit()"></Button>
+        <Button text="Login" class="btn btn-login" (tap)="submit()"></Button>
     </StackLayout>
 </FlexboxLayout>
