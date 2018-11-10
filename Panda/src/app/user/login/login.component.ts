@@ -34,8 +34,10 @@ export class LoginComponent implements OnInit {
 
   submit() {
     console.log('btn login click', this.email, this.password);
-    appSettings.setString("email", this.email);
-    this.router.navigate(["/home"]);
+    if (this.email !== undefined && this.email !== '') {
+      appSettings.setString("email", this.email);
+      this.router.navigate(["/home"]);
+    }
   }
 
 }
