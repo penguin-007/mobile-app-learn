@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
+        console.log('home ngOnInit');
     }
 
     onDrawerButtonTap(): void {
