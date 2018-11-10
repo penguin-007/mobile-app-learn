@@ -8,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  email = '1';
+  password = '2';
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submit() {
+    console.log('BTN CLICK', this.email, this.password);
   }
 
 }

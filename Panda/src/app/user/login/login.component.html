@@ -1,1 +1,10 @@
-<Button text="login works!" class="btn btn-primary"></Button>
+<FlexboxLayout>
+    <StackLayout class="form" [class.dark]="!isLoggingIn">
+        <TextField hint="Email Address" keyboardType="email" autocorrect="false"
+            autocapitalizationType="none" [(ngModel)]="email" class="input input-border"></TextField>
+        <TextField hint="Password" secure="true" [(ngModel)]="password"
+            class="input input-border"></TextField>
+
+        <Button text="Login" class="btn btn-primary" (tap)="submit()"></Button>
+    </StackLayout>
+</FlexboxLayout>
