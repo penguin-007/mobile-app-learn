@@ -6,8 +6,7 @@ const routes: Routes = [
     { path: "", redirectTo: "/user", pathMatch: "full" },
     { path: "user", loadChildren: "~/app/user/user.module#UserModule" },
     { path: "home", loadChildren: "~/app/home/home.module#HomeModule" },
-    { path: "search", loadChildren: "~/app/search/search.module#SearchModule" },
-    { path: "featured", loadChildren: "~/app/featured/featured.module#FeaturedModule" },
+    { path: "projects", loadChildren: "~/app/projects/projects.module#ProjectsModule" },
     { path: "settings", loadChildren: "~/app/settings/settings.module#SettingsModule" }
 ];
 
