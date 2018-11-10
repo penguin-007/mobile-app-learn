@@ -29,7 +29,7 @@ export class UserService {
 
   userGetData(token) {
     let params = new URLSearchParams();
-    params.append("token", token)
+    params.append("token", token);
 
     return this.http.get(
       'https://api.showsite.xyz/user',

@@ -81,7 +81,7 @@ export class AppComponent implements OnInit {
                 console.warn("getUserData", 'noData');
             }
         }, error => {
-            console.log("showToken error", error);
+            console.error("getUserData", error);
         });
     }
 }
