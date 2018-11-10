@@ -5,6 +5,8 @@ import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nat
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
 
+import * as appSettings from "tns-core-modules/application-settings";
+
 @Component({
     moduleId: module.id,
     selector: "ns-app",
@@ -44,5 +46,10 @@ export class AppComponent implements OnInit {
 
         const sideDrawer = <RadSideDrawer>app.getRootView();
         sideDrawer.closeDrawer();
+    }
+
+    exitFromApp() {
+        // Removes all values.
+        appSettings.clear();
     }
 }
