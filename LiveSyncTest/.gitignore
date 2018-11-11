@@ -1,13 +1,9 @@
 # NativeScript
-hooks/
 node_modules/
 platforms/
 
 # NativeScript Template
-*.js.map
-*.js
 !webpack.config.js
-*.css
 
 # Logs
 logs
@@ -21,7 +17,6 @@ yarn-error.log*
 .AppleDouble
 .LSOverride
 .idea
-.cloud
 .project
 tmp/
 typings/
