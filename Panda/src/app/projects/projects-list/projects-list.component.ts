@@ -52,8 +52,11 @@ export class ProjectsListComponent implements OnInit {
   }
 
   public onItemTap(args) {
-    console.log("Item Tapped at cell index: " + args.index);
-    this.router.navigate(["projects/project", args.index]);
+    // console.log("projectsArray", this.projectsArray[args.index]);
+    let id = this.projectsArray[args.index].id;
+    if (id !== undefined) {
+      this.router.navigate(["projects/project", id]);
+    }
   }
 
 }
