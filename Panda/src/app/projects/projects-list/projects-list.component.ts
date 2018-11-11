@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+import { Router } from "@angular/router";
 
 import { ProjectsService } from '~/app/shared/projects/projects.service';
 
@@ -21,7 +22,8 @@ export class ProjectsListComponent implements OnInit {
   listLoaded = false;
 
   constructor(
-    private projectsService: ProjectsService
+    private projectsService: ProjectsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,6 +53,7 @@ export class ProjectsListComponent implements OnInit {
 
   public onItemTap(args) {
     console.log("Item Tapped at cell index: " + args.index);
+    this.router.navigate(["projects/project", args.index]);
   }
 
 }
