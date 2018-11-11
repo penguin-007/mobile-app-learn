@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PageRoute } from "nativescript-angular/router";
+import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 import { ReportsService } from '~/app/shared/reports/reports.service';
 
@@ -23,7 +23,8 @@ export class ReportsListComponent implements OnInit {
 
   constructor(
     private pageRoute: PageRoute,
-    private reportsService: ReportsService
+    private reportsService: ReportsService,
+    private routerExtensions: RouterExtensions
   ) {
     // use switchMap to get the latest activatedRoute instance
     this.pageRoute.activatedRoute.pipe(
@@ -49,6 +50,10 @@ export class ReportsListComponent implements OnInit {
     }, error => {
         console.error("getProjects", error);
     });
+  }
+  
+  goBack() {
+    this.routerExtensions.back();
   }
 
 }
