@@ -37,7 +37,7 @@ export class ProjectsListComponent implements OnInit {
   getProjects(token) {
     this.projectsService.getProjects(token).subscribe(result => {
       if (result['body'].results !== undefined) {
-        console.log("getProjects", result['body'].results);
+        // console.log("getProjects", result['body'].results);
         this.projectsArray = result['body'].results;
         setTimeout(() => {
           this.isLoading = false;
