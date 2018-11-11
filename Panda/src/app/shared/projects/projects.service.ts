@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from "@angular/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { Config } from "../config";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ProjectsService {
     params.append("token", token);
 
     return this.http.get(
-      'https://api.showsite.xyz/projects/list',
+      Config.apiUrl + 'projects/list',
       {headers: this.getCommonHeaders(), params: params}
     ).pipe(
       map(response => response.json()),

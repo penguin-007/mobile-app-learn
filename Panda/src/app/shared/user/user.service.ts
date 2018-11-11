@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers, Response, URLSearchParams } from "@angular/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { Observable } from "rxjs";
+import { Config } from '../config';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +16,12 @@ export class UserService {
 
   login() {
     return this.http.post(
-        "https://api.showsite.xyz/user/login",
-        JSON.stringify({
-            email: 'myworkbucket@gmail.com',
-            password: 'penguin'
-        }),
-        { headers: this.getCommonHeaders() }
+      Config.apiUrl + 'user/login',
+      JSON.stringify({
+          email: 'myworkbucket@gmail.com',
+          password: 'penguin'
+      }),
+      { headers: this.getCommonHeaders() }
     ).pipe(
         map(response => response.json()),
         catchError(this.handleErrors)
@@ -32,7 +33,7 @@ export class UserService {
     params.append("token", token);
 
     return this.http.get(
-      'https://api.showsite.xyz/user',
+      Config.apiUrl + 'user',
       {headers: this.getCommonHeaders(), params: params}
     ).pipe(
       map(response => response.json()),
