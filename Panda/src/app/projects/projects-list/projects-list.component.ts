@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+
 import { ProjectsService } from '~/app/shared/projects/projects.service';
 
 @Component({
@@ -16,11 +17,15 @@ export class ProjectsListComponent implements OnInit {
   projectsArray = [];
   // todo добавить модель проекта
 
+  isLoading = false;
+  listLoaded = false;
+
   constructor(
     private projectsService: ProjectsService
   ) { }
 
   ngOnInit() {
+    this.isLoading = true;
     this.getProjects(this.token);
   }
 
@@ -32,12 +37,20 @@ export class ProjectsListComponent implements OnInit {
   getProjects(token) {
     this.projectsService.getProjects(token).subscribe(result => {
       if (result['body'].results !== undefined) {
-        // console.log("getProjects", result['body'].results);
+        console.log("getProjects", result['body'].results);
         this.projectsArray = result['body'].results;
+        setTimeout(() => {
+          this.isLoading = false;
+          this.listLoaded = true;
+        }, 500);
       }
     }, error => {
         console.error("getProjects", error);
     });
+  }
+
+  public onItemTap(args) {
+    console.log("Item Tapped at cell index: " + args.index);
   }
 
 }

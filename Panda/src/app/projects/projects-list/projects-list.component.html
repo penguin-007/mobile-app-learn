@@ -15,5 +15,16 @@
     <Label class="action-bar-title" text="Projects"></Label>
 </ActionBar>
 
+<ListView [items]="projectsArray"  class="list-group" (itemTap)="onItemTap($event)" [class.visible]="listLoaded">
+    <ng-template let-project="item" let-i="index" let-odd="odd" let-even="even" >
+        <!-- The item template can only have a single root view container (e.g. GridLayout, StackLayout, etc.)-->
+        <StackLayout orientation="horizontal" class="list-group-item">
+            <Label text="Name: " textWrap="true"></Label>
+            <Label [text]="project.title"></Label>
+        </StackLayout>
+    </ng-template>
+</ListView>
 
-<Button text="projects-list works!" class="btn btn-primary"></Button>
+<ActivityIndicator [busy]="isLoading" [visibility]="isLoading ? 'visible' : 'collapse'"
+row="1" horizontalAlignment="center" verticalAlignment="center"></ActivityIndicator>
+
