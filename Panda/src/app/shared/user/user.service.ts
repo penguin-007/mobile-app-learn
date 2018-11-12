@@ -14,17 +14,16 @@ export class UserService {
   ) {
   }
 
-  login() {
+  login(user) {
     return this.http.post(
       Config.apiUrl + 'user/login',
       JSON.stringify({
-          email: 'myworkbucket@gmail.com',
-          password: 'penguin'
+          email: user.email,
+          password: user.password
       }),
       { headers: this.getCommonHeaders() }
     ).pipe(
-        map(response => response.json()),
-        catchError(this.handleErrors)
+        map(response => response.json())
     );
   }
 
