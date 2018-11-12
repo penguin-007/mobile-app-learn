@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     // check is logged in
     let token = appSettings.getString("token");
     if (token !== undefined && token !== '') {
-      // console.log('get token', token);
+      // console.log('login get token', token);
       this.router.navigate(["/home"]);
     }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
 import { Router } from "@angular/router";
+import * as appSettings from "tns-core-modules/application-settings";
 
 import { ProjectsService } from '~/app/shared/projects/projects.service';
 
@@ -12,8 +13,6 @@ import { ProjectsService } from '~/app/shared/projects/projects.service';
   moduleId: module.id,
 })
 export class ProjectsListComponent implements OnInit {
-
-  protected token = '5602021ae760ac1f3b3307f74f5ff522';
 
   projectsArray = [];
   // todo добавить модель проекта
@@ -28,7 +27,12 @@ export class ProjectsListComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    this.getProjects(this.token);
+    
+    let token = appSettings.getString("token");
+    // console.log('token project', token);
+    if (token !== undefined && token !== '') {
+      this.getProjects(token);
+    }
   }
 
   onDrawerButtonTap(): void {

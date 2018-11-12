@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 import { ReportsService } from '~/app/shared/reports/reports.service';
+import * as appSettings from "tns-core-modules/application-settings";
 
 @Component({
   selector: 'ns-reports-list',
@@ -10,8 +11,6 @@ import { ReportsService } from '~/app/shared/reports/reports.service';
   moduleId: module.id,
 })
 export class ReportsListComponent implements OnInit {
-
-  protected token = '5602021ae760ac1f3b3307f74f5ff522';
 
   reportsArray = [];
   // todo добавить модель проекта
@@ -33,7 +32,11 @@ export class ReportsListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getReports(this.token, this.projectId);
+    let token = appSettings.getString("token");
+    // console.log('token report', token);
+    if (token !== undefined && token !== '') {
+      this.getReports(token, this.projectId);
+    }
   }
 
   getReports(token, projectId) {
