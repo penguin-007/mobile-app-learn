@@ -1,31 +1,56 @@
-/* Add mobile styles for the component here.  */
-FlexboxLayout {
-    justify-content: center;
-    align-items: center;
-    background-size: cover;
+.page {
+  align-items: center;
+  flex-direction: column;
 }
-StackLayout {
-  width: 300;
-  padding: 15 15;
-  background-color: #f0f0f0;
+.form {
+  margin-left: 30;
+  margin-right: 30;
+  flex-grow: 2;
+  vertical-align: middle;
+}
+
+.logo {
+  height: 70;
+  font-weight: bold;
+}
+.header {
+  horizontal-align: center;
+  font-size: 25;
+  font-weight: 600;
+  margin-bottom: 70;
+  text-align: center;
+  color: #D51A1A;
+}
+
+.input-field {
+  margin-bottom: 25;
+}
+.input {
+  font-size: 18;
+  placeholder-color: #A8A8A8;
+}
+.input:disabled {
+  background-color: white;
+  opacity: 0.5;
+}
+
+.btn-primary {
+  height: 50;
+  margin: 0 5 15 5;
+  background-color: #4ec256;
   border-radius: 5;
-  border-color: #4ec256;
-  border-width: 2;
+  font-size: 20;
+  font-weight: 600;
+  text-transform: uppercase;
 }
-  
-  Image {
-    margin-bottom: 20;
-    height: 60;
-  }
-  .btn-login {
-    background-color: #4ec256;
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 0;
-    color: #fff;
-  }
-  TextField {
-    placeholder-color: #ccc;
-    color: black;
-    margin-bottom: 10;
-  }
+.btn-primary:disabled {
+  opacity: 0.7;
+}
+.login-label {
+  horizontal-align: center;
+  color: #A8A8A8;
+  font-size: 16;
+}
+.bold {
+  color: #000000; 
+}
