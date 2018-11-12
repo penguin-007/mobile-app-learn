@@ -27,10 +27,6 @@ ActionBar .action-bar-title {
     horizontal-align: center;
 }
 
-.action-bar {
-    background-color: #42a548;
-}
-
  // Drawer navigation custom styles
 $sidedrawer-header-image-size: 60;
 $sidedrawer-header-image-offset-top: 20;
@@ -41,7 +37,7 @@ $sidedrawer-list-icon-size: 20;
 
 .sidedrawer {
     &.sidedrawer-left {
-        background-color: $corp-color;
+        background-color: $ab-background;
 
         .sidedrawer-header-image {
             color: $background-dark;
@@ -59,7 +55,7 @@ $sidedrawer-list-icon-size: 20;
     }
 
     .sidedrawer-header {
-        background-color: $corp-color;
+        background-color: $ab-background;
 
         .sidedrawer-header-brand {
             color: $ab-color;
