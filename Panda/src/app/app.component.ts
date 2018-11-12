@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
     name;
     email;
 
-    protected token = '5602021ae760ac1f3b3307f74f5ff522';
+    protected token;
 
     constructor(
         private router: Router,
@@ -41,9 +41,9 @@ export class AppComponent implements OnInit {
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
         // get token
-        // this.email = appSettings.getString("token");
-
-        this.getUserData(this.token);
+        // console.log('app comp on init');
+        // this.token = appSettings.getString("token");
+        // this.getUserData(this.token);
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -82,6 +82,7 @@ export class AppComponent implements OnInit {
             }
         }, error => {
             console.error("getUserData", error);
+            alert('Ошибка токена');
         });
     }
 }

@@ -33,12 +33,14 @@ export class LoginComponent implements OnInit {
 
     this.user = new User();
 
-    // settings
-    // this.user.email = appSettings.getString("email");
-    // if (this.user.email !== undefined) {
-    //   this.router.navigate(["/home"]);
-    // }
-    // console.log('this.email', this.user.email);
+    // check is logged in
+    let token = appSettings.getString("token");
+    if (token !== undefined && token !== '') {
+      // console.log('get token', token);
+      this.router.navigate(["/home"]);
+    }
+
+    // todo - remove this
     this.user.email = 'myworkbucket@gmail.com';
     this.user.password = 'penguin';
   }
@@ -55,7 +57,7 @@ export class LoginComponent implements OnInit {
       let token = result['body']['token'].token;
       // console.log('token', token);
       if (token !== undefined && token !== '') {
-        appSettings.setString("token", this.user.email);
+        appSettings.setString("token", token);
         this.router.navigate(["/home"]);
       } else {
         this.alert('Ошибка ответа от сервера');

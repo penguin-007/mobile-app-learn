@@ -35,8 +35,7 @@ export class UserService {
       Config.apiUrl + 'user',
       {headers: this.getCommonHeaders(), params: params}
     ).pipe(
-      map(response => response.json()),
-      catchError(this.handleErrors)
+      map(response => response.json())
     );
   }
 
