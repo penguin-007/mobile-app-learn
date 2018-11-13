@@ -6,6 +6,7 @@ import { alert, prompt } from "tns-core-modules/ui/dialogs";
 import * as appSettings from "tns-core-modules/application-settings";
 import { User } from '~/app/shared/user/user.model';
 import { UserService } from '~/app/shared/user/user.service';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
   selector: 'ns-login',
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private page: Page,
     private router: Router,
-    private userServise: UserService
+    private userServise: UserService,
+    private routerExtensions: RouterExtensions,
   ) {
   }
 
@@ -37,7 +39,12 @@ export class LoginComponent implements OnInit {
     let token = appSettings.getString("token");
     if (token !== undefined && token !== '') {
       // console.log('login get token', token);
-      this.router.navigate(["/home"]);
+      this.routerExtensions.navigate(["/home"], {
+        transition: {
+            name: "fade"
+        },
+        clearHistory: true
+      });
     }
 
     // todo - remove this
@@ -58,7 +65,13 @@ export class LoginComponent implements OnInit {
       // console.log('token', token);
       if (token !== undefined && token !== '') {
         appSettings.setString("token", token);
-        this.router.navigate(["/home"]);
+
+        this.routerExtensions.navigate(["/home"], {
+            transition: {
+                name: "fade"
+            },
+            clearHistory: true
+        });
       } else {
         this.alert('Ошибка ответа от сервера');
       }
