@@ -23,8 +23,6 @@ export class AppComponent implements OnInit {
     name;
     email;
 
-    protected token;
-
     constructor(
         private router: Router,
         private routerExtensions: RouterExtensions,
@@ -42,9 +40,9 @@ export class AppComponent implements OnInit {
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
         // get token
-        // console.log('app comp on init');
-        // this.token = appSettings.getString("token");
-        // this.getUserData(this.token);
+        // let token = appSettings.getString("token");
+        // this.getUserData(token);
+        // console.log('app comp on init', token);
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -69,7 +67,7 @@ export class AppComponent implements OnInit {
     exitFromApp() {
         // Removes all values.
         appSettings.clear();
-        exit();
+        // exit();
     }
 
     // get user data by token
