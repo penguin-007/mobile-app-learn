@@ -35,18 +35,6 @@ export class LoginComponent implements OnInit {
 
     this.user = new User();
 
-    // check is logged in
-    let token = appSettings.getString("token");
-    if (token !== undefined && token !== '') {
-      // console.log('login get token', token);
-      this.routerExtensions.navigate(["/home"], {
-        transition: {
-            name: "fade"
-        },
-        clearHistory: true
-      });
-    }
-
     // todo - remove this
     this.user.email = 'myworkbucket@gmail.com';
     this.user.password = 'penguin';
@@ -106,6 +94,6 @@ export class LoginComponent implements OnInit {
     }).then((data) => {
       console.log('forgotPassword', data.text.trim());
     });
-}
+  }
 
 }
