@@ -47,7 +47,7 @@ export class ReportOverviewComponent implements OnInit {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {
         this.reportData = result.body.results;
-        // console.log("reportData", this.reportData);
+        console.log("reportData", this.reportData);
       }
     }, (error) => {
         console.error("getProjects", error);
