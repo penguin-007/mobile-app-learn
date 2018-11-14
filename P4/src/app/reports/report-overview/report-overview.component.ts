@@ -22,6 +22,9 @@ export class ReportOverviewComponent implements OnInit {
 
   report: Report;
 
+  averageData;
+  avgROI: string;
+
   constructor(
     private pageRoute: PageRoute,
     private routerExtensions: RouterExtensions,
@@ -63,7 +66,9 @@ export class ReportOverviewComponent implements OnInit {
 
   renderReportStat(token, report) {
     this.reportsService.renderReportStat(token, report).subscribe((result) => {
-      console.log("renderReportStat", result);
+      this.averageData = result.body.avg;
+      console.log("renderReportStat", this.averageData);
+      this.avgROI = ((this.averageData.ProfitLost / this.averageData.Cost)).toFixed(2);
     }, (error) => {
       console.error("renderReportStat", error);
     });

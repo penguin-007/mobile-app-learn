@@ -14,3 +14,42 @@
     </ActionItem>
     <Label class="action-bar-title" text="Report: {{report?.title}}"></Label>
 </ActionBar>
+
+
+<StackLayout>
+    <FlexboxLayout flexDirection="row" class="list-item-hold" >
+        <GridLayout class="list-item" rows="26, 26, 26, 26, 26, 26" columns="*"   >
+
+            <StackLayout row="0" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                <Label text="ConversionRate: " textWrap="true"></Label>
+                <Label [text]="averageData?.ConversionRate"></Label>
+            </StackLayout>
+
+            <StackLayout row="1" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                <Label text="ConversionValue: " textWrap="true"></Label>
+                <Label [text]="averageData?.ConversionValue"></Label>
+            </StackLayout>
+
+            <StackLayout row="2" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                <Label text="Cost: " textWrap="true"></Label>
+                <Label [text]="averageData?.Cost"></Label>
+            </StackLayout>
+
+            <StackLayout row="3" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                <Label text="Margin: " textWrap="true"></Label>
+                <Label [text]="averageData?.Margin"></Label>
+            </StackLayout>
+
+            <StackLayout row="4" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                <Label text="ProfitLost: " textWrap="true"></Label>
+                <Label [text]="averageData?.ProfitLost"></Label>
+            </StackLayout>
+
+            <StackLayout row="5" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                <Label text="avgROI: " textWrap="true"></Label>
+                <Label [text]="avgROI"></Label>
+            </StackLayout>
+
+        </GridLayout>
+    </FlexboxLayout>
+</StackLayout>
