@@ -25,6 +25,8 @@ export class ReportOverviewComponent implements OnInit {
   averageData;
   avgROI: string;
 
+  processing = false;
+
   constructor(
     private pageRoute: PageRoute,
     private routerExtensions: RouterExtensions,
@@ -41,6 +43,8 @@ export class ReportOverviewComponent implements OnInit {
 
   ngOnInit() {
     this.report = new Report();
+
+    this.processing = true;
 
     this.token = appSettings.getString("token");
     if (this.token !== undefined && this.token !== "") {
@@ -67,8 +71,9 @@ export class ReportOverviewComponent implements OnInit {
   renderReportStat(token, report) {
     this.reportsService.renderReportStat(token, report).subscribe((result) => {
       this.averageData = result.body.avg;
-      console.log("renderReportStat", this.averageData);
+      // console.log("renderReportStat", this.averageData);
       this.avgROI = ((this.averageData.ProfitLost / this.averageData.Cost)).toFixed(2);
+      this.processing = false;
     }, (error) => {
       console.error("renderReportStat", error);
     });

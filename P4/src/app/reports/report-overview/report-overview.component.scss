@@ -19,4 +19,8 @@
     vertical-align: center;
     height: 22;
     width: 100%;
+    opacity: 0;
+}
+.list-item.visible .list-item-title {
+    opacity: 1;
 }

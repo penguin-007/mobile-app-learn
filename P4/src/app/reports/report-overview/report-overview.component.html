@@ -18,7 +18,7 @@
 
 <StackLayout>
     <FlexboxLayout flexDirection="row" class="list-item-hold" >
-        <GridLayout class="list-item" rows="26, 26, 26, 26, 26, 26" columns="*"   >
+        <GridLayout class="list-item" rows="26, 26, 26, 26, 26, 26, auto" columns="*" [class.visible]="!processing"  >
 
             <StackLayout row="0" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
                 <Label text="ConversionRate: " textWrap="true"></Label>
@@ -49,6 +49,8 @@
                 <Label text="avgROI: " textWrap="true"></Label>
                 <Label [text]="avgROI"></Label>
             </StackLayout>
+            
+            <ActivityIndicator rowSpan="7" [busy]="processing"></ActivityIndicator>
 
         </GridLayout>
     </FlexboxLayout>

@@ -33,6 +33,8 @@ export class ReportsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
+
     const token = appSettings.getString("token");
     // console.log('token report', token);
     if (token !== undefined && token !== "") {
@@ -61,7 +63,6 @@ export class ReportsListComponent implements OnInit {
   }
 
   onItemTap(args) {
-    console.log("item report tap", args.index);
     const reportId = this.reportsArray[args.index].id;
     this.routerExtensions.navigate(["projects/project", this.projectId, "report", reportId], {
       transition: {
