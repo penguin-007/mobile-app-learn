@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { PageRoute } from "nativescript-angular/router";
+import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 import * as appSettings from "tns-core-modules/application-settings";
 
@@ -15,7 +15,8 @@ export class ReportOverviewComponent implements OnInit {
   reportID;
 
   constructor(
-    private pageRoute: PageRoute
+    private pageRoute: PageRoute,
+    private routerExtensions: RouterExtensions
   ) {
     // use switchMap to get the latest activatedRoute instance
     this.pageRoute.activatedRoute.pipe(
@@ -32,6 +33,10 @@ export class ReportOverviewComponent implements OnInit {
     if (token !== undefined && token !== "") {
       console.log(token, this.projectId, this.reportID);
     }
+  }
+
+  goBack() {
+    this.routerExtensions.back();
   }
 
 }
