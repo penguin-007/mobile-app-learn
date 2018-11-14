@@ -43,6 +43,22 @@ export class ReportsService {
     );
   }
 
+  renderReportStat(token, report) {
+    const params = new URLSearchParams();
+    params.append("token", token);
+    params.append("reports_id", report.id);
+    params.append("projects_id", report.project_id);
+    params.append("report_type", report.report_type);
+    params.append("metrics", report.metrics);
+
+    return this.http.get(
+      Config.apiUrl + "report/stats",
+      {headers: this.getCommonHeaders(), params}
+    ).pipe(
+      map((response) => response.json())
+    );
+  }
+
   getCommonHeaders() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");

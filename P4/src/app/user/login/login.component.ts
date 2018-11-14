@@ -12,14 +12,14 @@ import { RouterExtensions } from 'nativescript-angular/router';
   selector: 'ns-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  moduleId: module.id,
+  moduleId: module.id
 })
 export class LoginComponent implements OnInit {
-  
+
   user: User;
 
   processing = false;
-  
+
   @ViewChild("password") password: ElementRef;
 
   constructor(
@@ -45,10 +45,10 @@ export class LoginComponent implements OnInit {
       this.alert("Заполните все поля.");
       return;
     }
-    
+
     this.processing = true;
 
-    this.userServise.login(this.user).subscribe(result => {
+    this.userServise.login(this.user).subscribe((result) => {
       let token = result['body']['token'].token;
       // console.log('token', token);
       if (token !== undefined && token !== '') {
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         this.alert('Ошибка ответа от сервера');
       }
       this.processing = false;
-    }, error => {
+    }, (error) => {
       console.error('login', error);
       this.processing = false;
       this.alert('Ошибка авторизации');

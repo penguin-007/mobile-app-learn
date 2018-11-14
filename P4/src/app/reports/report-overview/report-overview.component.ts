@@ -4,6 +4,8 @@ import { switchMap } from "rxjs/operators";
 import * as appSettings from "tns-core-modules/application-settings";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 
+import { Report } from "~/app/shared/reports/reports.model";
+
 @Component({
   selector: "ns-report-overview",
   templateUrl: "./report-overview.component.html",
@@ -12,9 +14,13 @@ import { ReportsService } from "~/app/shared/reports/reports.service";
 })
 export class ReportOverviewComponent implements OnInit {
 
+  token;
+
+  // router data
   projectId;
   reportID;
-  reportData;
+
+  report: Report;
 
   constructor(
     private pageRoute: PageRoute,
@@ -31,11 +37,11 @@ export class ReportOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    const token = appSettings.getString("token");
-    // console.log('token report', token);
-    if (token !== undefined && token !== "") {
-      // console.log(token, this.projectId, this.reportID);
-      this.getReport(token, this.projectId, this.reportID);
+    this.report = new Report();
+
+    this.token = appSettings.getString("token");
+    if (this.token !== undefined && this.token !== "") {
+      this.getReport(this.token, this.projectId, this.reportID);
     }
   }
 
@@ -46,11 +52,20 @@ export class ReportOverviewComponent implements OnInit {
   getReport(token, projectId, reportID) {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {
-        this.reportData = result.body.results;
-        console.log("reportData", this.reportData);
+        this.report = result.body.results;
+        // console.log("report", this.report);
+        this.renderReportStat(this.token, this.report);
       }
     }, (error) => {
         console.error("getProjects", error);
+    });
+  }
+
+  renderReportStat(token, report) {
+    this.reportsService.renderReportStat(token, report).subscribe((result) => {
+      console.log("renderReportStat", result);
+    }, (error) => {
+      console.error("renderReportStat", error);
     });
   }
 
