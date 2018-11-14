@@ -25,8 +25,21 @@ export class ReportsService {
       Config.apiUrl + "report/list",
       {headers: this.getCommonHeaders(), params}
     ).pipe(
-      map((response) => response.json()),
-      catchError(this.handleErrors)
+      map((response) => response.json())
+    );
+  }
+
+  getReport(token, projectId, reportId) {
+    const params = new URLSearchParams();
+    params.append("token", token);
+    params.append("projects_id", projectId);
+    params.append("reports_id", reportId);
+
+    return this.http.get(
+      Config.apiUrl + "report/get",
+      {headers: this.getCommonHeaders(), params}
+    ).pipe(
+      map((response) => response.json())
     );
   }
 
