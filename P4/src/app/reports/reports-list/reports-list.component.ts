@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
-import { ReportsService } from '~/app/shared/reports/reports.service';
+import { ReportsService } from "~/app/shared/reports/reports.service";
+
 import * as appSettings from "tns-core-modules/application-settings";
 
 @Component({
-  selector: 'ns-reports-list',
-  templateUrl: './reports-list.component.html',
-  styleUrls: ['./reports-list.component.css'],
-  moduleId: module.id,
+  selector: "ns-reports-list",
+  templateUrl: "./reports-list.component.html",
+  styleUrls: ["./reports-list.component.css"],
+  moduleId: module.id
 })
 export class ReportsListComponent implements OnInit {
 
@@ -27,36 +28,40 @@ export class ReportsListComponent implements OnInit {
   ) {
     // use switchMap to get the latest activatedRoute instance
     this.pageRoute.activatedRoute.pipe(
-      switchMap(activatedRoute => activatedRoute.params)
-    ).forEach((params) => { this.projectId = +params["id"]; });
+      switchMap((activatedRoute) => activatedRoute.params)
+    ).forEach((params) => { this.projectId = +params.id; });
   }
 
   ngOnInit() {
-    let token = appSettings.getString("token");
+    const token = appSettings.getString("token");
     // console.log('token report', token);
-    if (token !== undefined && token !== '') {
+    if (token !== undefined && token !== "") {
       this.getReports(token, this.projectId);
     }
   }
 
   getReports(token, projectId) {
-    this.reportsService.getReports(token, projectId).subscribe(result => {
-      if (result['body'].results !== undefined) {
+    this.reportsService.getReports(token, projectId).subscribe((result) => {
+      if (result.body.results !== undefined) {
         // console.log("getProjects", result['body'].results);
-        this.reportsArray = result['body'].results;
+        this.reportsArray = result.body.results;
         // console.log('this.reportsArray', this.reportsArray);
         setTimeout(() => {
           this.isLoading = false;
           this.listLoaded = true;
         }, 500);
       }
-    }, error => {
+    }, (error) => {
         console.error("getProjects", error);
     });
   }
-  
+
   goBack() {
     this.routerExtensions.back();
+  }
+
+  onItemTap(args) {
+    console.log("item report tap", args.index);
   }
 
 }

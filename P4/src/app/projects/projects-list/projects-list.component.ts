@@ -1,16 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
+
 import { Router } from "@angular/router";
+
 import * as appSettings from "tns-core-modules/application-settings";
 
-import { ProjectsService } from '~/app/shared/projects/projects.service';
+import { ProjectsService } from "~/app/shared/projects/projects.service";
 
 @Component({
-  selector: 'ns-projects-list',
-  templateUrl: './projects-list.component.html',
-  styleUrls: ['./projects-list.component.css'],
-  moduleId: module.id,
+  selector: "ns-projects-list",
+  templateUrl: "./projects-list.component.html",
+  styleUrls: ["./projects-list.component.css"],
+  moduleId: module.id
 })
 export class ProjectsListComponent implements OnInit {
 
@@ -27,10 +29,10 @@ export class ProjectsListComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
-    
-    let token = appSettings.getString("token");
+
+    const token = appSettings.getString("token");
     // console.log('token project', token);
-    if (token !== undefined && token !== '') {
+    if (token !== undefined && token !== "") {
       this.getProjects(token);
     }
   }
@@ -41,23 +43,23 @@ export class ProjectsListComponent implements OnInit {
   }
 
   getProjects(token) {
-    this.projectsService.getProjects(token).subscribe(result => {
-      if (result['body'].results !== undefined) {
+    this.projectsService.getProjects(token).subscribe((result) => {
+      if (result.body.results !== undefined) {
         // console.log("getProjects", result['body'].results);
-        this.projectsArray = result['body'].results;
+        this.projectsArray = result.body.results;
         setTimeout(() => {
           this.isLoading = false;
           this.listLoaded = true;
         }, 500);
       }
-    }, error => {
+    }, (error) => {
         console.error("getProjects", error);
     });
   }
 
-  public onItemTap(args) {
+  onItemTap(args) {
     // console.log("projectsArray", this.projectsArray[args.index]);
-    let id = this.projectsArray[args.index].id;
+    const id = this.projectsArray[args.index].id;
     if (id !== undefined) {
       this.router.navigate(["projects/project", id]);
     }
