@@ -4,7 +4,7 @@ import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 import { filter } from "rxjs/operators";
 import * as app from "tns-core-modules/application";
-import {exit} from 'nativescript-exit';
+// import {exit} from 'nativescript-exit';
 
 import * as appSettings from "tns-core-modules/application-settings";
 
@@ -16,12 +16,13 @@ import { UserService } from "./shared/user/user.service";
     templateUrl: "app.component.html"
 })
 export class AppComponent implements OnInit {
-    private _activatedUrl: string;
-    private _sideDrawerTransition: DrawerTransitionBase;
 
     // user data
     name;
     email;
+
+    private _activatedUrl: string;
+    private _sideDrawerTransition: DrawerTransitionBase;
 
     constructor(
         private router: Router,

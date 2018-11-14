@@ -1,6 +1,7 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
+
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 
 import { AppRoutingModule } from "./app-routing.module";
