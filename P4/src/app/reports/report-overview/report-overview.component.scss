@@ -1,4 +1,8 @@
 /* Add mobile styles for the component here.  */
+.page {
+    align-items: center;
+    flex-direction: column;
+}
 .list-item-hold {
     padding: 3 0;
 }
@@ -23,4 +27,18 @@
 }
 .list-item.visible .list-item-title {
     opacity: 1;
+}
+.list-item-btn {
+    border-color: red;
+    border-width: 2;
+    width: 100%;
+} 
+.btn-primary {
+    height: 40;
+    margin: 0 5 0 5;
+    background-color: #4ec256;
+    border-radius: 5;
+    font-size: 16;
+    font-weight: 600;
+    text-transform: uppercase;
 }

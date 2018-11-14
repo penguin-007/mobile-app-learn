@@ -79,4 +79,8 @@ export class ReportOverviewComponent implements OnInit {
     });
   }
 
+  onTap() {
+    console.log("tap");
+  }
+
 }
