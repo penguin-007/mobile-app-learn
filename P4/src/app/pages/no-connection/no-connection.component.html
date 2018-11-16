@@ -1,1 +1,8 @@
-<Button text="no-connection works!" class="btn btn-primary"></Button> 
+<GridLayout class="page" columns="*" rows="*, *">
+    <StackLayout row="0" class="input-field"  verticalAlignment="center" horizontalAlignment="center" >
+        <Label class="connection-icon" text="&#xe900;"></Label>
+    </StackLayout>
+    <StackLayout row="1" class="input-field"  verticalAlignment="center" horizontalAlignment="center">
+        <Button text="Reload" (tap)="reload()" class="btn btn-primary"></Button>
+    </StackLayout>
+</GridLayout>

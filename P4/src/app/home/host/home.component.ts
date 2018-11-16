@@ -9,7 +9,7 @@ import { UserService } from "~/app/shared/user/user.service";
     selector: "Home",
     moduleId: module.id,
     templateUrl: "./home.component.html",
-    styleUrls: ["./home.component.css"],
+    styleUrls: ["./home.component.css"]
 })
 export class HomeComponent implements OnInit {
 
@@ -23,12 +23,12 @@ export class HomeComponent implements OnInit {
 
     ngOnInit(): void {
         // Init your component properties here.
-        console.log('home ngOnInit');
+        // console.log('home ngOnInit');
 
         // get token
-        let token = appSettings.getString("token");
+        const token = appSettings.getString("token");
         this.getUserData(token);
-        console.log('app comp on init', token);
+        // console.log("app comp on init", token);
     }
 
     onDrawerButtonTap(): void {
@@ -38,16 +38,16 @@ export class HomeComponent implements OnInit {
 
     // get user data by token
     getUserData(token) {
-        this.userService.userGetData(token).subscribe(result => {
+        this.userService.userGetData(token).subscribe((result) => {
             if (result.body !== undefined) {
                 // console.log("getUserData", result['body']);
                 this.user = result.body.results;
             } else {
-                console.warn("getUserData", 'noData');
+                console.warn("getUserData", "noData");
             }
-        }, error => {
+        }, (error) => {
             console.error("getUserData", error);
-            alert('Ошибка токена');
+            alert("Ошибка токена");
         });
     }
 }

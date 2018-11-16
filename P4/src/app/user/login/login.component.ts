@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     private page: Page,
     private router: Router,
     private userServise: UserService,
-    private routerExtensions: RouterExtensions,
+    private routerExtensions: RouterExtensions
   ) {
   }
 
