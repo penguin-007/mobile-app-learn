@@ -13,11 +13,11 @@ const routes: Routes = [
     },
     { path: "projects",
       loadChildren: "~/app/projects/projects.module#ProjectsModule",
-      canActivate: [ConnectTypeService, AuthGuardService]
+      canActivate: [AuthGuardService]
     },
     { path: "settings",
       loadChildren: "~/app/settings/settings.module#SettingsModule",
-      canActivate: [ConnectTypeService, AuthGuardService]
+      canActivate: [AuthGuardService]
     },
     { path: "page",
       loadChildren: "~/app/pages/pages.module#PagesModule"

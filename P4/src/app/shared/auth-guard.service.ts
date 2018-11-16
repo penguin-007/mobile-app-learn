@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Router, CanActivate } from "@angular/router";
+import { Injectable } from "@angular/core";
+import { CanActivate, Router } from "@angular/router";
+import { RouterExtensions } from "nativescript-angular/router";
 import * as appSettings from "tns-core-modules/application-settings";
-import { RouterExtensions } from 'nativescript-angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class AuthGuardService implements CanActivate {
 
@@ -14,8 +14,8 @@ export class AuthGuardService implements CanActivate {
   }
 
   canActivate() {
-    let token = appSettings.getString("token");
-    if (token !== undefined && token !== '') {
+    const token = appSettings.getString("token");
+    if (token !== undefined && token !== "") {
       return true;
     } else {
       this.routerExtensions.navigate(["/user"], {
@@ -24,6 +24,7 @@ export class AuthGuardService implements CanActivate {
         },
         clearHistory: true
       });
+
       return false;
     }
   }

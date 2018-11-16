@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
+import { RouterExtensions } from "nativescript-angular/router";
 import { Page } from "tns-core-modules/ui/page";
-import { RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
-  selector: 'ns-no-connection',
-  templateUrl: './no-connection.component.html',
-  styleUrls: ['./no-connection.component.css'],
+  selector: "ns-no-connection",
+  templateUrl: "./no-connection.component.html",
+  styleUrls: ["./no-connection.component.css"],
   moduleId: module.id
 })
 export class NoConnectionComponent implements OnInit {

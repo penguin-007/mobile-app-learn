@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NavigationEnd, Router } from "@angular/router";
 import { RouterExtensions } from "nativescript-angular/router";
 import { DrawerTransitionBase, RadSideDrawer, SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
@@ -8,14 +8,14 @@ import * as app from "tns-core-modules/application";
 
 import * as appSettings from "tns-core-modules/application-settings";
 
-import { UserService } from "./shared/user/user.service";
+import * as connectivity from "connectivity";
 
 @Component({
     moduleId: module.id,
     selector: "ns-app",
     templateUrl: "app.component.html"
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
     // user data
     name;
@@ -26,8 +26,7 @@ export class AppComponent implements OnInit {
 
     constructor(
         private router: Router,
-        private routerExtensions: RouterExtensions,
-        private userService: UserService
+        private routerExtensions: RouterExtensions
     ) {
         // Use the component constructor to inject services.
     }
@@ -40,10 +39,11 @@ export class AppComponent implements OnInit {
         .pipe(filter((event: any) => event instanceof NavigationEnd))
         .subscribe((event: NavigationEnd) => this._activatedUrl = event.urlAfterRedirects);
 
-        // get token
-        // let token = appSettings.getString("token");
-        // this.getUserData(token);
-        // console.log('app comp on init', token);
+        this.monitorNetworkStart();
+    }
+
+    ngOnDestroy(): void {
+        this.monitorNetworkStop();
     }
 
     get sideDrawerTransition(): DrawerTransitionBase {
@@ -71,19 +71,23 @@ export class AppComponent implements OnInit {
         // exit();
     }
 
-    // get user data by token
-    getUserData(token) {
-        this.userService.userGetData(token).subscribe(result => {
-            if (result['body'] !== undefined) {
-                // console.log("getUserData", result['body']);
-                this.name  = result['body'].results.name ? result['body'].results.name : '';
-                this.email = result['body'].results.email ? result['body'].results.email : '';
-            } else {
-                console.warn("getUserData", 'noData');
+    monitorNetworkStart() {
+        connectivity.startMonitoring((newConnectionType) => {
+            if (newConnectionType === connectivity.connectionType.none) {
+                // console.log("No network connection available!");
+                this.routerExtensions.navigate(["page/no-connection"], {
+                    transition: {
+                        name: "fade"
+                    },
+                    clearHistory: true
+                });
             }
-        }, error => {
-            console.error("getUserData", error);
-            alert('Ошибка токена');
         });
     }
+
+    monitorNetworkStop() {
+        connectivity.stopMonitoring();
+        // console.log("No longer monitoring network connection changes.");
+    }
+
 }
