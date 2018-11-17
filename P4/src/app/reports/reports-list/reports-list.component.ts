@@ -17,7 +17,7 @@ export class ReportsListComponent implements OnInit {
   // todo добавить модель проекта
 
   isLoading = false;
-  listLoaded = false;
+  token;
 
   projectId: number;
 
@@ -35,23 +35,27 @@ export class ReportsListComponent implements OnInit {
   ngOnInit() {
     this.isLoading = true;
 
-    const token = appSettings.getString("token");
+    this.token = appSettings.getString("token");
     // console.log('token report', token);
-    if (token !== undefined && token !== "") {
-      this.getReports(token, this.projectId);
+    if (this.token !== undefined && this.token !== "") {
+      this.getReports(this.token, this.projectId);
     }
   }
 
-  getReports(token, projectId) {
+  getReports(token, projectId, pullRefresh?) {
     this.reportsService.getReports(token, projectId).subscribe((result) => {
       if (result.body.results !== undefined) {
         // console.log("getProjects", result['body'].results);
         this.reportsArray = result.body.results;
         // console.log('this.reportsArray', this.reportsArray);
+
         setTimeout(() => {
           this.isLoading = false;
-          this.listLoaded = true;
         }, 500);
+
+        if (pullRefresh) {
+          pullRefresh.refreshing = false;
+        }
       }
     }, (error) => {
         console.error("getProjects", error);
@@ -69,6 +73,11 @@ export class ReportsListComponent implements OnInit {
           name: "fade"
       }
     });
+  }
+  
+  refreshList(args) {
+    let pullRefresh = args.object;
+    this.getReports(this.token, this.projectId, pullRefresh);
   }
 
 }

@@ -8,6 +8,9 @@ import * as appSettings from "tns-core-modules/application-settings";
 
 import { ProjectsService } from "~/app/shared/projects/projects.service";
 
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
+
 @Component({
   selector: "ns-projects-list",
   templateUrl: "./projects-list.component.html",
@@ -18,6 +21,7 @@ export class ProjectsListComponent implements OnInit {
 
   projectsArray = [];
   // todo добавить модель проекта
+  token;
 
   isLoading = false;
 
@@ -25,14 +29,15 @@ export class ProjectsListComponent implements OnInit {
     private projectsService: ProjectsService,
     private router: Router
   ) { }
+  
 
   ngOnInit() {
     this.isLoading = true;
 
-    const token = appSettings.getString("token");
+    this.token = appSettings.getString("token");
     // console.log('token project', token);
-    if (token !== undefined && token !== "") {
-      this.getProjects(token);
+    if (this.token !== undefined && this.token !== "") {
+      this.getProjects(this.token);
     }
   }
 
@@ -41,12 +46,19 @@ export class ProjectsListComponent implements OnInit {
       sideDrawer.showDrawer();
   }
 
-  getProjects(token) {
+  getProjects(token, pullRefresh?) {
     this.projectsService.getProjects(token).subscribe((result) => {
       if (result.body.results !== undefined) {
         // console.log("getProjects", result['body'].results);
         this.projectsArray = result.body.results;
-        this.isLoading = false;
+        
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 500);
+
+        if (pullRefresh) {
+          pullRefresh.refreshing = false;
+        }
       }
     }, (error) => {
         console.error("getProjects", error);
@@ -60,4 +72,9 @@ export class ProjectsListComponent implements OnInit {
     }
   }
 
+  refreshList(args) {
+      let pullRefresh = args.object;
+      this.getProjects(this.token, pullRefresh);
+  }
+  
 }
