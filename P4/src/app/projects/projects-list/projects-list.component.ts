@@ -20,7 +20,6 @@ export class ProjectsListComponent implements OnInit {
   // todo добавить модель проекта
 
   isLoading = false;
-  listLoaded = false;
 
   constructor(
     private projectsService: ProjectsService,
@@ -47,21 +46,17 @@ export class ProjectsListComponent implements OnInit {
       if (result.body.results !== undefined) {
         // console.log("getProjects", result['body'].results);
         this.projectsArray = result.body.results;
-        setTimeout(() => {
-          this.isLoading = false;
-          this.listLoaded = true;
-        }, 500);
+        this.isLoading = false;
       }
     }, (error) => {
         console.error("getProjects", error);
     });
   }
 
-  onItemTap(args) {
-    // console.log("projectsArray", this.projectsArray[args.index]);
-    const id = this.projectsArray[args.index].id;
-    if (id !== undefined) {
-      this.router.navigate(["projects/project", id]);
+  projectTap(item) {
+    // console.log('item', item);
+    if (item.id !== undefined) {
+      this.router.navigate(["projects/project", item.id]);
     }
   }
 
