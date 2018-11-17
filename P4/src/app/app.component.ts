@@ -71,6 +71,8 @@ export class AppComponent implements OnInit, OnDestroy {
         // exit();
     }
 
+    
+
     monitorNetworkStart() {
         connectivity.startMonitoring((newConnectionType) => {
             if (newConnectionType === connectivity.connectionType.none) {

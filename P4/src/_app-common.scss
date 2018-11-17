@@ -45,7 +45,7 @@ $sidedrawer-list-icon-size: 20;
 
         .sidedrawer-header-image {
             color: $background-dark;
-            height: $sidedrawer-header-image-size;
+            // height: $sidedrawer-header-image-size;
             width: $sidedrawer-header-image-size;
             font-size: $sidedrawer-header-image-size;
             padding: 0;
@@ -60,6 +60,9 @@ $sidedrawer-list-icon-size: 20;
 
     .sidedrawer-header {
         background-color: $corp-color;
+        height: auto;
+        padding-top: 10;
+        padding-bottom: 10;
 
         .sidedrawer-header-brand {
             color: $ab-color;
@@ -90,5 +93,9 @@ $sidedrawer-list-icon-size: 20;
                 }
             }
         }
+    }
+
+    .sidedrawer-footer {
+
     }
 }
