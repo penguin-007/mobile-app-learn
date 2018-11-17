@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
 
     user;
 
+    xTranslate = 0;
+
     constructor(
         private userService: UserService
     ) {
@@ -48,6 +50,20 @@ export class HomeComponent implements OnInit {
         }, (error) => {
             console.error("getUserData", error);
             alert("Ошибка токена");
+        });
+    }
+
+    onSwipe(args) {
+        if (args.direction === 2) {
+            this.xTranslate -= 50;
+        } else if (args.direction === 1) {
+            this.xTranslate += 50;
+        }
+    
+        let grid = args.object;
+        grid.animate({
+            translate: { x: this.xTranslate, y: 0 },
+            duration: 200
         });
     }
 }
