@@ -15,26 +15,28 @@
     <Label class="action-bar-title" text="Reports"></Label>
 </ActionBar>
 
-<PullToRefresh (refresh)="refreshList($event)">
-    <ListView class="list-group" [items]="reportsArray" (itemTap)="onItemTap($event)" [class.visible]="!isLoading" >
-        <ng-template let-report="item" let-i="index" let-odd="odd" let-even="even" >
-            <FlexboxLayout flexDirection="row" class="list-item-hold" >
-                <GridLayout class="list-item" rows="22, 22" columns="*, *"   >
-                    <StackLayout row="0" col="0" colSpan="2" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                        <Label text="Name: " textWrap="true"></Label>
-                        <Label [text]="report.title"></Label>
-                    </StackLayout>
-                    <StackLayout row="1" col="0" class="list-item-date"  verticalAlignment="bottom" horizontalAlignment="left">
-                        <Label [text]="report.created_at"></Label>
-                    </StackLayout>
-                    <StackLayout row="1" col="1" class="list-item-type" verticalAlignment="bottom" horizontalAlignment="right" >
-                        <Label [text]="report.report_type"></Label>
-                    </StackLayout>
-                </GridLayout>
-            </FlexboxLayout>
-        </ng-template>
-    </ListView>
-</PullToRefresh>
-
-<ActivityIndicator [busy]="isLoading" class="activity-indicator"></ActivityIndicator>
+<GridLayout rows="*">
+    <PullToRefresh row="0" (refresh)="refreshList($event)">
+        <ScrollView orientation="vertical" class="main_holder">
+            <StackLayout class="list_items_holder" [class.visible]="!isLoading" >
+                <!-- >> ngfor-bind-items-html -->
+                <StackLayout *ngFor="let report of reportsArray" class="list_items" >
+                    <GridLayout class="list_item_holder" rows="40, 20" columns="60, *" (tap)="reportTap(report)" >
+                        <StackLayout row="0" col="0" class="list_item__image" rowSpan="2" verticalAlignment="center" horizontalAlignment="center">
+                            <Label class="fa" [text]='getReportTypeIco(report)'></Label>
+                        </StackLayout>
+                        <StackLayout row="0" col="1" class="list_item__title" verticalAlignment="top" horizontalAlignment="left">
+                            <Label [text]="report.title" textWrap="true" ></Label>
+                        </StackLayout>
+                        <StackLayout row="1" col="1" class="list_item__date" verticalAlignment="center" horizontalAlignment="left">
+                            <Label [text]="report.created_at"></Label>
+                        </StackLayout>
+                    </GridLayout>
+                </StackLayout>
+                <!-- << ngfor-bind-items-html -->
+            </StackLayout>
+        </ScrollView>
+    </PullToRefresh>
+    <ActivityIndicator [busy]="isLoading" class="activity-indicator" ></ActivityIndicator>
+</GridLayout>
 

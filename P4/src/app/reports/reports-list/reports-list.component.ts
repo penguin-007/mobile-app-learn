@@ -80,4 +80,25 @@ export class ReportsListComponent implements OnInit {
     this.getReports(this.token, this.projectId, pullRefresh);
   }
 
+  reportTap(item) {
+    this.routerExtensions.navigate(["projects/project", this.projectId, "report", item.id], {
+      transition: {
+          name: "fade"
+      }
+    });
+  }
+
+  getReportTypeIco(item) {
+    if (item.report_type === 'shopping') {
+      //return "&#xf290;";
+      return '';
+    } else if (item.report_type === 'mixed') {
+      //return '&#xf0f6;';
+      return '';
+    } else {
+      // return '&#xf29c';
+      return '';
+    }
+  }
+
 }
