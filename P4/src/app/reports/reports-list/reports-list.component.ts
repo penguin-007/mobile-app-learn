@@ -20,6 +20,7 @@ export class ReportsListComponent implements OnInit {
   token;
 
   projectId: number;
+  xTranslate: number;
 
   constructor(
     private pageRoute: PageRoute,
@@ -66,15 +67,6 @@ export class ReportsListComponent implements OnInit {
     this.routerExtensions.back();
   }
 
-  onItemTap(args) {
-    const reportId = this.reportsArray[args.index].id;
-    this.routerExtensions.navigate(["projects/project", this.projectId, "report", reportId], {
-      transition: {
-          name: "fade"
-      }
-    });
-  }
-  
   refreshList(args) {
     let pullRefresh = args.object;
     this.getReports(this.token, this.projectId, pullRefresh);
@@ -99,6 +91,22 @@ export class ReportsListComponent implements OnInit {
       // return '&#xf29c';
       return '';
     }
+  }
+
+  onSwipe(args) {
+      if (args.direction === 2) {
+          this.xTranslate -= 50;
+      } else if (args.direction === 1) {
+          this.xTranslate += 50;
+      }
+  
+      console.log('direction', args.direction);
+      
+      let grid = args.object;
+      grid.animate({
+          translate: { x: this.xTranslate, y: 0 },
+          duration: 200
+      });
   }
 
 }

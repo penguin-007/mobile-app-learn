@@ -21,7 +21,7 @@
             <StackLayout class="list_items_holder" [class.visible]="!isLoading" >
                 <!-- >> ngfor-bind-items-html -->
                 <StackLayout *ngFor="let report of reportsArray" class="list_items" >
-                    <GridLayout class="list_item_holder" rows="40, 20" columns="60, *" (tap)="reportTap(report)" >
+                    <GridLayout class="list_item_holder" rows="40, 20" columns="60, *" (tap)="reportTap(report)" (swipe)="onSwipe($event)" >
                         <StackLayout row="0" col="0" class="list_item__image" rowSpan="2" verticalAlignment="center" horizontalAlignment="center">
                             <Label class="fa" [text]='getReportTypeIco(report)'></Label>
                         </StackLayout>
