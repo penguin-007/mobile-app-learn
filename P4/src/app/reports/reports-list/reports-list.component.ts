@@ -18,9 +18,7 @@ export class ReportsListComponent implements OnInit {
 
   isLoading = false;
   token;
-
   projectId: number;
-  xTranslate: number;
 
   constructor(
     private pageRoute: PageRoute,
@@ -91,22 +89,6 @@ export class ReportsListComponent implements OnInit {
       // return '&#xf29c';
       return '';
     }
-  }
-
-  onSwipe(args) {
-      if (args.direction === 2) {
-          this.xTranslate -= 50;
-      } else if (args.direction === 1) {
-          this.xTranslate += 50;
-      }
-  
-      console.log('direction', args.direction);
-      
-      let grid = args.object;
-      grid.animate({
-          translate: { x: this.xTranslate, y: 0 },
-          duration: 200
-      });
   }
 
 }
