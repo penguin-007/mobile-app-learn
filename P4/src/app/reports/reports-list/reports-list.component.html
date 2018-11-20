@@ -16,8 +16,8 @@
 </ActionBar>
 
 <GridLayout rows="*">
-    <StackLayout row="0" class="main_holder" >
-        <RadListView [items]="reportsArray" class="list_items_holder" [class.visible]="!isLoading">
+    <StackLayout row="0"  class="main_holder" >
+        <RadListView [items]="reportsArray" pullToRefresh="true" (pullToRefreshInitiated)="onPullToRefreshInitiated($event)" class="list_items_holder" [class.visible]="!isLoading">
             <ng-template let-report="item">
                 <StackLayout class="list_items" >
                     <GridLayout class="list_item_holder" rows="40, 20" columns="60, *" (tap)="reportTap(report)" (swipe)="onSwipe($event)" >

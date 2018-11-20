@@ -4,6 +4,7 @@ import { switchMap } from "rxjs/operators";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 
 import * as appSettings from "tns-core-modules/application-settings";
+import { ListViewEventData } from "nativescript-ui-listview";
 
 @Component({
   selector: "ns-reports-list",
@@ -53,7 +54,7 @@ export class ReportsListComponent implements OnInit {
         }, 500);
 
         if (pullRefresh) {
-          pullRefresh.refreshing = false;
+          pullRefresh.notifyPullToRefreshFinished();
         }
       }
     }, (error) => {
@@ -65,7 +66,7 @@ export class ReportsListComponent implements OnInit {
     this.routerExtensions.back();
   }
 
-  refreshList(args) {
+  onPullToRefreshInitiated(args: ListViewEventData) {
     let pullRefresh = args.object;
     this.getReports(this.token, this.projectId, pullRefresh);
   }
