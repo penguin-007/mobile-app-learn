@@ -1,10 +1,12 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 
 import * as appSettings from "tns-core-modules/application-settings";
 import { ListViewEventData } from "nativescript-ui-listview";
+import { View } from "tns-core-modules/ui/page/page";
+import { RadListViewComponent } from "nativescript-ui-listview/angular/listview-directives";
 
 @Component({
   selector: "ns-reports-list",
@@ -20,6 +22,8 @@ export class ReportsListComponent implements OnInit {
   isLoading = false;
   token;
   projectId: number;
+  
+  @ViewChild("myListView") listViewComponent: RadListViewComponent;
 
   constructor(
     private pageRoute: PageRoute,
@@ -69,6 +73,26 @@ export class ReportsListComponent implements OnInit {
   onPullToRefreshInitiated(args: ListViewEventData) {
     let pullRefresh = args.object;
     this.getReports(this.token, this.projectId, pullRefresh);
+  }
+
+  onSwipeCellStarted(args: ListViewEventData) {
+    const swipeLimits = args.data.swipeLimits;
+    const swipeView = args['object'];
+    const leftItem = swipeView.getViewById<View>('mark-view');
+    const rightItem = swipeView.getViewById<View>('delete-view');
+    swipeLimits.left = leftItem.getMeasuredWidth();
+    swipeLimits.right = rightItem.getMeasuredWidth();
+    swipeLimits.threshold = leftItem.getMeasuredWidth() / 2;
+  }
+
+  onLeftSwipeClick(args: ListViewEventData) {
+    console.log("Left swipe click");
+    this.listViewComponent.listView.notifySwipeToExecuteFinished();
+  }
+
+  public onRightSwipeClick(args) {
+    console.log("Right swipe click");
+    // this.dataItems.splice(this.dataItems.indexOf(args.object.bindingContext), 1);
   }
 
   reportTap(item) {
