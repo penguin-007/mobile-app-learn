@@ -1,27 +1,23 @@
 import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
-import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angular";
 
-import { NativeScriptHttpModule } from "nativescript-angular/http";
+import { AppRoutingModule, COMPONENTS } from "./app-routing.module";
+import { AppComponent } from "./app.component";
 
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
-
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
 
 @NgModule({
     bootstrap: [
         AppComponent
     ],
     imports: [
-        AppRoutingModule,
         NativeScriptModule,
-        NativeScriptUISideDrawerModule,
-        NativeScriptHttpModule,
+        AppRoutingModule,
         NativeScriptUIListViewModule
     ],
     declarations: [
-        AppComponent
+        AppComponent,
+        ...COMPONENTS
     ],
     schemas: [
         NO_ERRORS_SCHEMA

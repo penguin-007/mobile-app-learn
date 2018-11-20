@@ -15,10 +15,22 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
+<!--
 <GridLayout class="home_account_holder" columns="*, *" rows="30, 30, 30, 30" >
     <Label text="{{user?.name}}" row="0" col="0" verticalAlignment="center"></Label>
     <Label text="{{user?.surname}}" row="0" col="1" verticalAlignment="center"></Label>
     <Label text="{{user?.email}}" row="1" colSpan="2" verticalAlignment="center"></Label>
     <Label text="{{user?.phone}}" row="2" colSpan="2" verticalAlignment="center"></Label>
     <Label text="{{user?.timezone}}" row="3" colSpan="2" verticalAlignment="center" (swipe)="onSwipe($event)" ></Label>
+</GridLayout>
+-->
+
+<GridLayout tkExampleTitle tkToggleNavButton>
+    <RadListView [items]="dataItems">
+        <ng-template tkListItemTemplate let-item="item">
+            <StackLayout orientation="vertical">
+                <Label class="nameLabel" [text]="item.name"></Label>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
 </GridLayout>
