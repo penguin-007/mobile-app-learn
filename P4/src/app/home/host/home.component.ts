@@ -15,18 +15,6 @@ export class HomeComponent implements OnInit {
 
     user;
 
-    dataItems = [
-        {
-            name: '12321321'
-        },
-        {
-            name: '11'
-        },
-        {
-            name: '222'
-        },
-    ];
-
     xTranslate = 0;
 
     constructor(

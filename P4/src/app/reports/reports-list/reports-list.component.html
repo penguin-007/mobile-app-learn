@@ -15,11 +15,11 @@
     <Label class="action-bar-title" text="Reports"></Label>
 </ActionBar>
 
+<!--
 <GridLayout rows="*">
     <PullToRefresh row="0" (refresh)="refreshList($event)">
         <ScrollView orientation="vertical" class="main_holder">
             <StackLayout class="list_items_holder" [class.visible]="!isLoading" >
-                <!-- >> ngfor-bind-items-html -->
                 <StackLayout *ngFor="let report of reportsArray" class="list_items" >
                     <GridLayout class="list_item_holder" rows="40, 20" columns="60, *" (tap)="reportTap(report)" (swipe)="onSwipe($event)" >
                         <StackLayout row="0" col="0" class="list_item__image" rowSpan="2" verticalAlignment="center" horizontalAlignment="center">
@@ -33,10 +33,20 @@
                         </StackLayout>
                     </GridLayout>
                 </StackLayout>
-                <!-- << ngfor-bind-items-html -->
             </StackLayout>
         </ScrollView>
     </PullToRefresh>
     <ActivityIndicator [busy]="isLoading" class="activity-indicator" ></ActivityIndicator>
+</GridLayout>
+-->
+
+<GridLayout rows="*">
+    <RadListView [items]="reportsArray">
+        <ng-template let-item="item">
+            <StackLayout orientation="vertical">
+                <Label [text]="item.title"></Label>
+            </StackLayout>
+        </ng-template>
+    </RadListView>
 </GridLayout>
 

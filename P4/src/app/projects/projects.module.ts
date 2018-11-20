@@ -7,11 +7,13 @@ import { ProjectsRoutingModule } from "./projects-routing.module";
 import { ReportsListComponent } from "../reports/reports-list/reports-list.component";
 
 import { ReportOverviewComponent } from "../reports/report-overview/report-overview.component";
+import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 @NgModule({
   imports: [
     NativeScriptCommonModule,
-    ProjectsRoutingModule
+    ProjectsRoutingModule,
+    NativeScriptUIListViewModule
   ],
   declarations: [
     ProjectsListComponent,

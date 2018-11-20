@@ -4,8 +4,6 @@ import { NativeScriptUISideDrawerModule } from "nativescript-ui-sidedrawer/angul
 
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 
-import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
-
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
@@ -17,8 +15,7 @@ import { AppComponent } from "./app.component";
         AppRoutingModule,
         NativeScriptModule,
         NativeScriptUISideDrawerModule,
-        NativeScriptHttpModule,
-        NativeScriptUIListViewModule
+        NativeScriptHttpModule
     ],
     declarations: [
         AppComponent
