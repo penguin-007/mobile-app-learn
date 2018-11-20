@@ -103,6 +103,11 @@ export class ReportsListComponent implements OnInit {
     });
   }
 
+  onItemSelected(args) {
+    let pullRefresh = args.object;
+    console.log('press', pullRefresh);
+  }
+
   getReportTypeIco(item) {
     if (item.report_type === 'shopping') {
       //return "&#xf290;";

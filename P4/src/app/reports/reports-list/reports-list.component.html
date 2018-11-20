@@ -17,9 +17,9 @@
 
 <GridLayout rows="*">
     <StackLayout row="0"  class="main_holder" >
-        <RadListView #myListView [items]="reportsArray" pullToRefresh="true" swipeActions="true" (pullToRefreshInitiated)="onPullToRefreshInitiated($event)" (itemSwipeProgressStarted)="onSwipeCellStarted($event)" class="list_items_holder" [class.visible]="!isLoading">
-            <ng-template let-report="item" (tap)="reportTap(report)">
-                <StackLayout class="list_items"  >
+        <RadListView #myListView [items]="reportsArray" selectionBehavior="Press" (itemSelected)="onItemSelected($event)" pullToRefresh="true" swipeActions="true" (pullToRefreshInitiated)="onPullToRefreshInitiated($event)" (itemSwipeProgressStarted)="onSwipeCellStarted($event)" class="list_items_holder" [class.visible]="!isLoading">
+            <ng-template let-report="item" >
+                <StackLayout class="list_items" (tap)="reportTap(report)" >
                     <GridLayout class="list_item_holder" rows="40, 20" columns="60, *"  >
                         <StackLayout row="0" col="0" class="list_item__image" rowSpan="2" verticalAlignment="center" horizontalAlignment="center">
                             <Label class="fa" [text]='getReportTypeIco(report)'></Label>
