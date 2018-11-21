@@ -78,34 +78,24 @@ export class ReportsListComponent implements OnInit {
   onSwipeCellStarted(args: ListViewEventData) {
     const swipeLimits = args.data.swipeLimits;
     const swipeView = args['object'];
-    const leftItem = swipeView.getViewById<View>('mark-view');
-    const rightItem = swipeView.getViewById<View>('delete-view');
-    swipeLimits.left = leftItem.getMeasuredWidth();
+    const rightItem = swipeView.getViewById<View>('setting-view');
     swipeLimits.right = rightItem.getMeasuredWidth();
-    swipeLimits.threshold = leftItem.getMeasuredWidth() / 2;
+    swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
   }
 
-  onLeftSwipeClick(args: ListViewEventData) {
-    console.log("Left swipe click");
-    this.listViewComponent.listView.notifySwipeToExecuteFinished();
-  }
-
-  public onRightSwipeClick(args) {
+  onRightSwipeClick(args: ListViewEventData) {
     console.log("Right swipe click");
+    this.listViewComponent.listView.notifySwipeToExecuteFinished();
     // this.dataItems.splice(this.dataItems.indexOf(args.object.bindingContext), 1);
   }
 
   reportTap(item) {
-    this.routerExtensions.navigate(["projects/project", this.projectId, "report", item.id], {
+    const reportId = this.reportsArray[item.index].id;
+    this.routerExtensions.navigate(["projects/project", this.projectId, "report", reportId], {
       transition: {
           name: "fade"
       }
     });
-  }
-
-  onItemSelected(args) {
-    let pullRefresh = args.object;
-    console.log('press', pullRefresh);
   }
 
   getReportTypeIco(item) {
