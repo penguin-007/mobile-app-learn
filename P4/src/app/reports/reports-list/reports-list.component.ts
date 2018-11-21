@@ -84,9 +84,8 @@ export class ReportsListComponent implements OnInit {
   }
 
   onRightSwipeClick(args: ListViewEventData) {
-    console.log("Right swipe click");
+    console.log("Right swipe click", args.index);
     this.listViewComponent.listView.notifySwipeToExecuteFinished();
-    // this.dataItems.splice(this.dataItems.indexOf(args.object.bindingContext), 1);
   }
 
   reportTap(item) {
