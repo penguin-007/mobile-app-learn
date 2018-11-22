@@ -48,6 +48,10 @@ export class ReportsSettingComponent implements OnInit {
     }
   }
 
+  goBack() {
+    this.routerExtensions.back();
+  }
+
   getReport(token, projectId, reportID) {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {

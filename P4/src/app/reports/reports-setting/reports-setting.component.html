@@ -19,7 +19,7 @@
     <PullToRefresh row="0" (refresh)="refreshList($event)">
         <ScrollView orientation="vertical" class="main_holder">
 
-            <GridLayout rows="*" cols="*, *">
+            <GridLayout class="list_items_holder" rows="*" columns="*, *" [class.visible]="!isLoading" >
                 <Label row="0" col="0" [text]="report?.title"></Label>
                 <Label row="0" col="1" [text]="report?.title"></Label>
             </GridLayout>
