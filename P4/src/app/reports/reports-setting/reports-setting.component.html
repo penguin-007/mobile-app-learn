@@ -19,11 +19,9 @@
     <PullToRefresh row="0" (refresh)="refreshList($event)">
         <ScrollView orientation="vertical" class="main_holder">
 
-            <GridLayout class="list_items_holder" rows="*" columns="*, *" [class.visible]="!isLoading" >
-                <Label row="0" col="0" [text]="report?.title"></Label>
-                <Label row="0" col="1" [text]="report?.title"></Label>
-                <StackLayout row="1" col="0" colSpan="2">
-                    <RadDataForm tkExampleTitle tkToggleNavButton [source]="report"></RadDataForm>
+            <GridLayout class="list_items_holder" rows="*" columns="*" [class.visible]="!isLoading" >
+                <StackLayout row="0" col="0">
+                    <RadDataForm [source]="report" [metadata]="personMetadata"></RadDataForm>
                 </StackLayout>
             </GridLayout>
 

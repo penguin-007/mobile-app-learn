@@ -24,6 +24,31 @@ export class ReportsSettingComponent implements OnInit {
 
   isLoading = true;
 
+  // personMetadata
+  personMetadata = {
+    "propertyAnnotations":
+    [
+        {
+            "name": "created_at",
+            "displayName": "Created At",
+            "editor": "DatePicker"
+        },
+        {
+            "name": "campaign_ids",
+            "displayName": "Campaign Ids",
+            "editor": "Picker",
+            "valuesProvider": [631068619, 631189199,632036150,631184837,632170047,631132025,632067263]
+        },
+        {
+            "name": "id",
+            "displayName": "Id",
+            "editor": "Stepper"
+        },
+    ]
+};
+
+  testDataJson;
+
   constructor(
     private pageRoute: PageRoute,
     private routerExtensions: RouterExtensions,

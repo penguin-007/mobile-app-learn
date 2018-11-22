@@ -5,4 +5,5 @@ export class Report {
     created_at: string;
     title: string;
     metrics: [];
+    campaign_ids: any;
 }
