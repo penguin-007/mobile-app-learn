@@ -15,6 +15,16 @@
     <Label class="action-bar-title" text="Setting: {{report?.title}} "></Label>
 </ActionBar>
 
-<GridLayout>
+<GridLayout rows="*">
+    <PullToRefresh row="0" (refresh)="refreshList($event)">
+        <ScrollView orientation="vertical" class="main_holder">
 
+            <GridLayout rows="*" cols="*, *">
+                <Label row="0" col="0" [text]="report?.title"></Label>
+                <Label row="0" col="1" [text]="report?.title"></Label>
+            </GridLayout>
+
+        </ScrollView>
+    </PullToRefresh>
+    <ActivityIndicator [busy]="isLoading" class="activity-indicator" ></ActivityIndicator>
 </GridLayout>

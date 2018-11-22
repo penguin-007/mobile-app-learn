@@ -22,6 +22,8 @@ export class ReportsSettingComponent implements OnInit {
   processing: boolean;
   token: any;
 
+  isLoading = true;
+
   constructor(
     private pageRoute: PageRoute,
     private routerExtensions: RouterExtensions,
@@ -50,7 +52,8 @@ export class ReportsSettingComponent implements OnInit {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {
         this.report = result.body.results;
-        console.log("report", this.report);
+        // console.log("report", this.report);
+        this.isLoading = false;
       }
     }, (error) => {
         console.error("getProjects", error);
