@@ -22,7 +22,7 @@ export class ReportsListComponent implements OnInit {
   isLoading = false;
   token;
   projectId: number;
-  
+
   @ViewChild("myListView") listViewComponent: RadListViewComponent;
 
   constructor(
@@ -71,20 +71,26 @@ export class ReportsListComponent implements OnInit {
   }
 
   onPullToRefreshInitiated(args: ListViewEventData) {
-    let pullRefresh = args.object;
+    const pullRefresh = args.object;
     this.getReports(this.token, this.projectId, pullRefresh);
   }
 
   onSwipeCellStarted(args: ListViewEventData) {
     const swipeLimits = args.data.swipeLimits;
-    const swipeView = args['object'];
+    const swipeView = args.object;
     const rightItem = swipeView.getViewById<View>('setting-view');
     swipeLimits.right = rightItem.getMeasuredWidth();
     swipeLimits.threshold = rightItem.getMeasuredWidth() / 2;
   }
 
   onRightSwipeClick(args: ListViewEventData) {
-    console.log("Right swipe click", args.index);
+    const item = args.object.bindingContext;
+    const reportId = item.id;
+    this.routerExtensions.navigate(["projects/project", this.projectId, "report", reportId, "setting"], {
+      transition: {
+          name: "fade"
+      }
+    });
     this.listViewComponent.listView.notifySwipeToExecuteFinished();
   }
 
