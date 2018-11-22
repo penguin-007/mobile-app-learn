@@ -22,6 +22,9 @@
             <GridLayout class="list_items_holder" rows="*" columns="*, *" [class.visible]="!isLoading" >
                 <Label row="0" col="0" [text]="report?.title"></Label>
                 <Label row="0" col="1" [text]="report?.title"></Label>
+                <StackLayout row="1" col="0" colSpan="2">
+                    <RadDataForm tkExampleTitle tkToggleNavButton [source]="report"></RadDataForm>
+                </StackLayout>
             </GridLayout>
 
         </ScrollView>

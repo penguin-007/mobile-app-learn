@@ -10,11 +10,14 @@ import { ReportsSettingComponent } from "../reports/reports-setting/reports-sett
 
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
+import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
+
 @NgModule({
   imports: [
     NativeScriptCommonModule,
     ProjectsRoutingModule,
-    NativeScriptUIListViewModule
+    NativeScriptUIListViewModule,
+    NativeScriptUIDataFormModule
   ],
   declarations: [
     ProjectsListComponent,

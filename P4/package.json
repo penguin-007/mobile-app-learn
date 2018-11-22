@@ -29,6 +29,7 @@
     "nativescript-exit": "^1.0.1",
     "nativescript-pulltorefresh": "^2.2.0",
     "nativescript-theme-core": "~1.0.4",
+    "nativescript-ui-dataform": "3.9.0",
     "nativescript-ui-listview": "3.8.0",
     "nativescript-ui-sidedrawer": "~5.0.0",
     "reflect-metadata": "~0.1.10",
