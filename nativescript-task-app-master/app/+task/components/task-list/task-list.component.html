@@ -1,0 +1,52 @@
+<GridLayout rows="*, 60, *">
+    <ns-task-banner (onClear)="clearTask()"></ns-task-banner>
+    <GridLayout row="1" columns="*, * *" class="count-bar">
+        <ns-task-count (onPress)="setFilter('completed')"
+            [count]="(completedTasks$ | async)?.length" label="Completed"></ns-task-count>
+        <ns-task-count col="1" (onPress)="setFilter('pending')"
+            [count]="(pendingTasks$ | async)?.length" label="Pending"></ns-task-count>
+        <ns-task-count col="2" (onPress)="setFilter('all')"
+            [count]="(tasks$ | async)?.length" label="All"></ns-task-count>
+    </GridLayout>
+    <RadListView row="2" height="100%"
+        backgroundColor="white"
+        selectionBehavior="LongPress"
+        (itemSwipeProgressStarted)="onSwipeCellStarted($event)"
+        (itemSwipeProgressChanged)="onCellSwiping($event)"
+        (itemSwipeProgressEnded)="onSwipeCellFinished($event)"
+        (itemSelected)="displayForm($event)"
+        swipeActions="true"
+        [items]="displayedTasks$ | async">
+        <ng-template let-item="item" let-i="index">
+            <StackLayout backgroundColor="white"
+                class="list-item"
+                [class.complete]="item.completed">
+                <Label class="title" [text]="item.name"></Label>
+                <Label class="description" [text]="item.description"></Label>
+            </StackLayout>
+        </ng-template>
+        <GridLayout *tkListItemSwipeTemplate
+            columns="auto, *, auto"
+            backgroundColor="white">
+            <StackLayout id="mark-view" col="0"
+                 class="btn-swipe btn-complete"
+                 (tap)="onLeftSwipeClick($event)">
+                <Label id="mark-text" text="Complete"></Label>
+            </StackLayout>
+            <StackLayout id="delete-view" col="2"
+                class="btn-swipe btn-delete"
+                (tap)="onRightSwipeClick($event)">
+                <Label id="delete-text" text="Delete"></Label>
+            </StackLayout>
+        </GridLayout>
+    </RadListView>
+    <GridLayout row="2" *ngIf="(displayedTasks$ | async).length === 0" class="placeholder"
+        rows="*">
+        <StackLayout verticalAlignment="center">
+            <Image [src]="placeholderImage"></Image>
+            <Label text="All caught up!"></Label>
+        </StackLayout>
+    </GridLayout>
+    <Button row="2" text="+" class="fab"
+        (tap)="displayForm()"></Button>
+</GridLayout>
