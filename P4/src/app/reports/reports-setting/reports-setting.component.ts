@@ -1,9 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
 import { switchMap } from "rxjs/operators";
 import * as appSettings from "tns-core-modules/application-settings";
 import { Report } from "~/app/shared/reports/reports.model";
 import { ReportsService } from "~/app/shared/reports/reports.service";
+import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
 
 @Component({
   selector: "ns-reports-setting",
@@ -26,6 +27,8 @@ export class ReportsSettingComponent implements OnInit {
 
   dataForEdit = {};
 
+  @ViewChild("myCommitDataForm") myCommitDataFormComp: RadDataFormComponent;
+
   // personMetadata
   reportSettingMetadata = {
     commitMode: "Immediate",
@@ -37,9 +40,13 @@ export class ReportsSettingComponent implements OnInit {
             editor: "DatePicker"
         },
         {
+            name: "email_notify",
+            displayName: "Email Notify",
+            editor: "Switch"
+        },
+        {
             name: "title",
             displayName: "Title",
-            valuesProvider: this.valuesProviderTitle,
             required: true,
             validators: [
                 { "name": "NonEmpty" },
@@ -100,26 +107,22 @@ export class ReportsSettingComponent implements OnInit {
       date_range: report.date_range,
       date_max: report.date_max,
       date_min: report.date_min,
-      email_notify: report.email_notify
+      email_notify: !!report.email_notify
     };
   }
 
-  valuesProviderTitle(title) {
-    return title + 'wwwwwwwwwwwww';
-  } 
-
   dfPropertyCommit(args) {
     console.log('dfPropertyCommit', args.propertyName);
-    args.returnValue = false;
+    // args.returnValue = false;
   }
 
   dfPropertyCommitted(args) {
-    console.log('dfPropertyCommitted', args.propertyName);
-    args.returnValue = false;
+    // console.log('dfPropertyCommitted', this.myCommitDataFormComp.dataForm.editedObject);
   }
 
-  onTap() {
+  saveSettings() {
     console.log('dataForEdit', this.dataForEdit);
+    this.myCommitDataFormComp.dataForm.commitAll();
   }
 
 }
