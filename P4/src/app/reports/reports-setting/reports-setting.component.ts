@@ -40,7 +40,7 @@ export class ReportsSettingComponent implements OnInit {
             editor: "DatePicker"
         },
         {
-            name: "email_notify",
+            name: "is_notify",
             displayName: "Email Notify",
             editor: "Switch"
         },
@@ -107,7 +107,7 @@ export class ReportsSettingComponent implements OnInit {
       date_range: report.date_range,
       date_max: report.date_max,
       date_min: report.date_min,
-      email_notify: !!report.email_notify
+      is_notify: !!+report.is_notify
     };
   }
 
@@ -122,7 +122,7 @@ export class ReportsSettingComponent implements OnInit {
 
   saveSettings() {
     console.log('dataForEdit', this.dataForEdit);
-    this.myCommitDataFormComp.dataForm.commitAll();
+    // this.myCommitDataFormComp.dataForm.commitAll();
   }
 
 }
