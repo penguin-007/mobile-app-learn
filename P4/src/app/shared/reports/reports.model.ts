@@ -6,4 +6,9 @@ export class Report {
     title: string;
     metrics: [];
     campaign_ids: any;
+    description: any;
+    date_range: any;
+    date_max: any;
+    date_min: any;
+    email_notify: any;
 }

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 import { PageRoute, RouterExtensions } from "nativescript-angular/router";
-import { ReportsService } from "~/app/shared/reports/reports.service";
 import { switchMap } from "rxjs/operators";
-import { Report } from "~/app/shared/reports/reports.model";
 import * as appSettings from "tns-core-modules/application-settings";
+import { Report } from "~/app/shared/reports/reports.model";
+import { ReportsService } from "~/app/shared/reports/reports.service";
 
 @Component({
-  selector: 'ns-reports-setting',
-  templateUrl: './reports-setting.component.html',
-  styleUrls: ['./reports-setting.component.css'],
+  selector: "ns-reports-setting",
+  templateUrl: "./reports-setting.component.html",
+  styleUrls: ["./reports-setting.component.css"],
   moduleId: module.id
 })
 
@@ -24,28 +24,19 @@ export class ReportsSettingComponent implements OnInit {
 
   isLoading = true;
 
+  dataForEdit = {};
+
   // personMetadata
-  personMetadata = {
-    "propertyAnnotations":
-    [
-        {
-            "name": "created_at",
-            "displayName": "Created At",
-            "editor": "DatePicker"
-        },
-        {
-            "name": "campaign_ids",
-            "displayName": "Campaign Ids",
-            "editor": "Picker",
-            "valuesProvider": [631068619, 631189199,632036150,631184837,632170047,631132025,632067263]
-        },
-        {
-            "name": "id",
-            "displayName": "Id",
-            "editor": "Stepper"
-        },
-    ]
-};
+  reportSettingMetadata = {
+      propertyAnnotations:
+      [
+          {
+              name: "date_max",
+              displayName: "Date Max",
+              editor: "DatePicker",
+          }
+      ]
+  };
 
   testDataJson;
 
@@ -69,7 +60,7 @@ export class ReportsSettingComponent implements OnInit {
 
     this.token = appSettings.getString("token");
     if (this.token !== undefined && this.token !== "") {
-      this.getReport(this.token, this.projectId, this.reportID);
+      this.getingReportData(this.token, this.projectId, this.reportID);
     }
   }
 
@@ -77,11 +68,12 @@ export class ReportsSettingComponent implements OnInit {
     this.routerExtensions.back();
   }
 
-  getReport(token, projectId, reportID) {
+  getingReportData(token, projectId, reportID) {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {
         this.report = result.body.results;
         // console.log("report", this.report);
+        this.setValueOnDataForm(this.report);
         this.isLoading = false;
       }
     }, (error) => {
@@ -89,5 +81,16 @@ export class ReportsSettingComponent implements OnInit {
     });
   }
 
+  setValueOnDataForm(report): void {
+    // prepare data for editing
+    this.dataForEdit = {
+      title: report.title,
+      description: report.description,
+      date_range: report.date_range,
+      date_max: report.date_max,
+      date_min: report.date_min,
+      email_notify: report.email_notify
+    };
+  }
 
 }
