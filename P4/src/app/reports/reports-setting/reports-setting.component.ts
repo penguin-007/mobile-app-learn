@@ -28,14 +28,25 @@ export class ReportsSettingComponent implements OnInit {
 
   // personMetadata
   reportSettingMetadata = {
-      propertyAnnotations:
-      [
-          {
-              name: "date_max",
-              displayName: "Date Max",
-              editor: "DatePicker",
-          }
-      ]
+    commitMode: "Immediate",
+    propertyAnnotations:
+    [
+        {
+            name: "date_max",
+            displayName: "Date Max",
+            editor: "DatePicker"
+        },
+        {
+            name: "title",
+            displayName: "Title",
+            valuesProvider: this.valuesProviderTitle,
+            required: true,
+            validators: [
+                { "name": "NonEmpty" },
+                { "name": "MaximumLength", "params": { "length": 10 } }
+            ]
+        }
+    ]
   };
 
   testDataJson;
@@ -91,6 +102,24 @@ export class ReportsSettingComponent implements OnInit {
       date_min: report.date_min,
       email_notify: report.email_notify
     };
+  }
+
+  valuesProviderTitle(title) {
+    return title + 'wwwwwwwwwwwww';
+  } 
+
+  dfPropertyCommit(args) {
+    console.log('dfPropertyCommit', args.propertyName);
+    args.returnValue = false;
+  }
+
+  dfPropertyCommitted(args) {
+    console.log('dfPropertyCommitted', args.propertyName);
+    args.returnValue = false;
+  }
+
+  onTap() {
+    console.log('dataForEdit', this.dataForEdit);
   }
 
 }
