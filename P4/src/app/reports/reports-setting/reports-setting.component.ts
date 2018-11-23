@@ -112,7 +112,7 @@ export class ReportsSettingComponent implements OnInit {
   }
 
   dfPropertyCommit(args) {
-    console.log('dfPropertyCommit', args.propertyName);
+    console.log("dfPropertyCommit", args.propertyName);
     // args.returnValue = false;
   }
 
@@ -121,8 +121,20 @@ export class ReportsSettingComponent implements OnInit {
   }
 
   saveSettings() {
-    console.log('dataForEdit', this.dataForEdit);
+    console.log("dataForEdit", this.dataForEdit);
+
+    const data: any = {};
+    data.token = this.token;
+    data.projects_id = this.projectId;
+    data.reports_id = this.reportID;
+    data.title = this.dataForEdit["title"];
+
     // this.myCommitDataFormComp.dataForm.commitAll();
+    this.reportsService.updateReport(data).subscribe((result) => {
+      // console.log("saveSettings", result);
+    }, (error) => {
+      console.error("saveSettings", error);
+    });
   }
 
 }

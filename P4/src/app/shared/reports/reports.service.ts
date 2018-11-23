@@ -59,6 +59,15 @@ export class ReportsService {
     );
   }
 
+  updateReport(report) {
+    return this.http.put(
+      Config.apiUrl + "report", report,
+      { headers: this.getCommonHeaders() }
+    ).pipe(
+        map((response) => response.json())
+    );
+  }
+
   getCommonHeaders() {
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
@@ -71,4 +80,5 @@ export class ReportsService {
 
     return Observable.throw(error);
   }
+
 }
