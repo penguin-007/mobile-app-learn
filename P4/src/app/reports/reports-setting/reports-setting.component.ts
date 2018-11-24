@@ -5,7 +5,6 @@ import * as appSettings from "tns-core-modules/application-settings";
 import { Report } from "~/app/shared/reports/reports.model";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { ListViewEventData } from "nativescript-ui-listview";
 
 @Component({
   selector: "ns-reports-setting",
@@ -111,13 +110,12 @@ export class ReportsSettingComponent implements OnInit {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {
         this.report = result.body.results;
-        console.log("report", this.report);
+        // console.log("report", this.report);
         this.setValueOnDataForm(this.report);
         this.isLoading = false;
         
         if (pullRefresh) {
-          console.log("report2", this.report);
-          pullRefresh.notifyPullToRefreshFinished();
+          pullRefresh.refreshing = false;
         }
       }
     }, (error) => {
@@ -173,7 +171,7 @@ export class ReportsSettingComponent implements OnInit {
     });
   }
 
-  pullToRefreshSettings(args: ListViewEventData) {
+  pullToRefreshSettings(args) {
     const pullRefresh = args.object;
     this.getingReportData(this.token, this.projectId, this.reportID, pullRefresh);
   }
