@@ -83,4 +83,12 @@ export class ReportOverviewComponent implements OnInit {
     console.log("tap");
   }
 
+  goToSettingPage() {
+    this.routerExtensions.navigate(["projects/project", this.projectId, "report", this.reportID, "setting"], {
+      transition: {
+          name: "fade"
+      }
+    });
+  }
+
 }
