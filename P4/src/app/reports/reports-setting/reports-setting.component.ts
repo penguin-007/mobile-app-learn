@@ -5,6 +5,7 @@ import * as appSettings from "tns-core-modules/application-settings";
 import { Report } from "~/app/shared/reports/reports.model";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
+import { ListViewEventData } from "nativescript-ui-listview";
 
 @Component({
   selector: "ns-reports-setting",
@@ -27,36 +28,56 @@ export class ReportsSettingComponent implements OnInit {
 
   dataForEdit = {};
 
-  @ViewChild("myCommitDataForm") myCommitDataFormComp: RadDataFormComponent;
+  @ViewChild("myRuntimeDataFormComp") myRuntimeDataFormComp: RadDataFormComponent;
 
   // personMetadata
   reportSettingMetadata = {
     commitMode: "Immediate",
     propertyAnnotations:
     [
-        {
-            name: "date_max",
-            displayName: "Date Max",
-            editor: "DatePicker"
-        },
-        {
-            name: "is_notify",
-            displayName: "Email Notify",
-            editor: "Switch"
-        },
-        {
-            name: "title",
-            displayName: "Title",
-            required: true,
-            validators: [
-                { "name": "NonEmpty" },
-                { "name": "MaximumLength", "params": { "length": 10 } }
-            ]
-        }
+      {
+          name: "title",
+          displayName: "Title",
+          index: 0,
+          required: true,
+          editor: "Text",
+          validators: [
+              { "name": "NonEmpty" },
+              { "name": "MaximumLength", "params": { "length": 10 } }
+          ]
+      },
+      {
+          name: "description",
+          displayName: "Description",
+          index: 1,
+          editor: "MultilineText",
+      },
+      {
+          name: "date_range",
+          displayName: "date_range",
+          index: 2,
+          editor: "Text",
+      },
+      {
+          name: "date_min",
+          displayName: "Date Min",
+          index: 3,
+          editor: "DatePicker"
+      },
+      {
+          name: "date_max",
+          displayName: "Date Max",
+          index: 4,
+          editor: "DatePicker"
+      },
+      {
+          name: "is_notify",
+          displayName: "Email Notify",
+          index: 5,
+          editor: "Switch"
+      },
     ]
   };
-
-  testDataJson;
 
   constructor(
     private pageRoute: PageRoute,
@@ -86,13 +107,18 @@ export class ReportsSettingComponent implements OnInit {
     this.routerExtensions.back();
   }
 
-  getingReportData(token, projectId, reportID) {
+  getingReportData(token, projectId, reportID, pullRefresh?) {
     this.reportsService.getReport(token, projectId, reportID).subscribe((result) => {
       if (result.body.results !== undefined) {
         this.report = result.body.results;
-        // console.log("report", this.report);
+        console.log("report", this.report);
         this.setValueOnDataForm(this.report);
         this.isLoading = false;
+        
+        if (pullRefresh) {
+          console.log("report2", this.report);
+          pullRefresh.notifyPullToRefreshFinished();
+        }
       }
     }, (error) => {
         console.error("getProjects", error);
@@ -121,20 +147,35 @@ export class ReportsSettingComponent implements OnInit {
   }
 
   saveSettings() {
-    console.log("dataForEdit", this.dataForEdit);
+    // const property = this.myRuntimeDataFormComp.dataForm.getPropertyByName("description");
+
+    // if (res !== undefined) {
+    //   this.hiddenField = !this.hiddenField;
+    //   res['hidden'] = this.hiddenField;
+    // }
+
+    this.isLoading = true;
 
     const data: any = {};
     data.token = this.token;
     data.projects_id = this.projectId;
     data.reports_id = this.reportID;
     data.title = this.dataForEdit["title"];
+    data.description = this.dataForEdit["description"];
+    data.is_notify = this.dataForEdit["is_notify"];
 
     // this.myCommitDataFormComp.dataForm.commitAll();
     this.reportsService.updateReport(data).subscribe((result) => {
       // console.log("saveSettings", result);
+      this.isLoading = false;
     }, (error) => {
       console.error("saveSettings", error);
     });
+  }
+
+  pullToRefreshSettings(args: ListViewEventData) {
+    const pullRefresh = args.object;
+    this.getingReportData(this.token, this.projectId, this.reportID, pullRefresh);
   }
 
 }

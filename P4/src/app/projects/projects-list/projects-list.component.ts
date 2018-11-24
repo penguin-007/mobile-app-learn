@@ -8,8 +8,6 @@ import * as appSettings from "tns-core-modules/application-settings";
 
 import { ProjectsService } from "~/app/shared/projects/projects.service";
 
-import { registerElement } from "nativescript-angular/element-registry";
-registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
 
 @Component({
   selector: "ns-projects-list",

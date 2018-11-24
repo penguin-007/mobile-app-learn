@@ -16,7 +16,7 @@
 </ActionBar>
 
 <GridLayout rows="*">
-    <PullToRefresh row="0" (refresh)="refreshList($event)">
+    <PullToRefresh row="0" (refresh)="pullToRefreshSettings($event)">
         <ScrollView orientation="vertical" class="main_holder">
 
             <GridLayout #myCommitDataForm class="list_items_holder" rows="*, auto" columns="*" [class.visible]="!isLoading" >

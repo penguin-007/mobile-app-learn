@@ -12,6 +12,9 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 
 import { NativeScriptUIDataFormModule } from "nativescript-ui-dataform/angular";
 
+import { registerElement } from "nativescript-angular/element-registry";
+registerElement("PullToRefresh", () => require("nativescript-pulltorefresh").PullToRefresh);
+
 @NgModule({
   imports: [
     NativeScriptCommonModule,
