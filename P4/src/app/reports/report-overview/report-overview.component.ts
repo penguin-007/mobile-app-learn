@@ -86,7 +86,9 @@ export class ReportOverviewComponent implements OnInit {
   goToSettingPage() {
     this.routerExtensions.navigate(["projects/project", this.projectId, "report", this.reportID, "setting"], {
       transition: {
-          name: "fade"
+        name: "fade",
+        duration: 300,
+        curve: "linear"
       }
     });
   }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RadSideDrawer } from "nativescript-ui-sidedrawer";
 import * as app from "tns-core-modules/application";
-
-import { Router } from "@angular/router";
+import { RouterExtensions } from "nativescript-angular/router";
 
 import * as appSettings from "tns-core-modules/application-settings";
 
@@ -25,7 +24,7 @@ export class ProjectsListComponent implements OnInit {
 
   constructor(
     private projectsService: ProjectsService,
-    private router: Router
+    private routerExtensions: RouterExtensions
   ) { }
   
 
@@ -65,9 +64,13 @@ export class ProjectsListComponent implements OnInit {
 
   projectTap(item) {
     // console.log('item', item);
-    if (item.id !== undefined) {
-      this.router.navigate(["projects/project", item.id]);
-    }
+    this.routerExtensions.navigate(["projects/project", item.id], {
+      transition: {
+        name: "slideLeft",
+        duration: 300,
+        curve: "ease"
+      }
+    });
   }
 
   refreshList(args) {

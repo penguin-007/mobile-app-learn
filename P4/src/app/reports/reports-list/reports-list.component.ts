@@ -95,10 +95,13 @@ export class ReportsListComponent implements OnInit {
   }
 
   reportTap(item) {
-    const reportId = this.reportsArray[item.index].id;
+    const tappedItem = item.view.bindingContext;
+    const reportId = tappedItem.id;
     this.routerExtensions.navigate(["projects/project", this.projectId, "report", reportId], {
       transition: {
-          name: "fade"
+        name: "slideLeft",
+        duration: 300,
+        curve: "ease"
       }
     });
   }
