@@ -20,43 +20,53 @@
 </ActionBar>
 
 
-<FlexboxLayout class="page" class="list-item-hold" >
-    <StackLayout class="form">
-        <GridLayout class="list-item" rows="26, 26, 26, 26, 26, 26, auto" columns="*" [class.visible]="!processing"  >
+<GridLayout rows="*">
+    <ScrollView row="0" orientation="vertical" >
+        <StackLayout class="main_holder" [class.visible]="!processing" >
 
-            <StackLayout row="0" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                <Label text="ConversionRate: " textWrap="true"></Label>
-                <Label [text]="averageData?.ConversionRate"></Label>
-            </StackLayout>
+            <GridLayout class="list-item" columns="*, *" rows="30, 30, 30" >
+                <Label text="{{report?.last_update}}" row="2" colSpan="2" verticalAlignment="center"></Label>
+                <Label text="{{report?.date_range}}" row="1" colSpan="2" verticalAlignment="center"></Label>
+                <Label text="{{report?.date_min}}" row="0" col="1" verticalAlignment="center"></Label>
+                <Label text="{{report?.date_max}}" row="0" col="0" verticalAlignment="center"></Label>
+            </GridLayout>
 
-            <StackLayout row="1" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                <Label text="ConversionValue: " textWrap="true"></Label>
-                <Label [text]="averageData?.ConversionValue"></Label>
-            </StackLayout>
+            <GridLayout class="list-item" rows="26, 26, 26, 26, 26, 26, auto" columns="*"  >
 
-            <StackLayout row="2" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                <Label text="Cost: " textWrap="true"></Label>
-                <Label [text]="averageData?.Cost"></Label>
-            </StackLayout>
+                <StackLayout row="0" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                    <Label text="ConversionRate: " textWrap="true"></Label>
+                    <Label [text]="averageData?.ConversionRate"></Label>
+                </StackLayout>
 
-            <StackLayout row="3" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                <Label text="Margin: " textWrap="true"></Label>
-                <Label [text]="averageData?.Margin"></Label>
-            </StackLayout>
+                <StackLayout row="1" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                    <Label text="ConversionValue: " textWrap="true"></Label>
+                    <Label [text]="averageData?.ConversionValue"></Label>
+                </StackLayout>
 
-            <StackLayout row="4" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                <Label text="ProfitLost: " textWrap="true"></Label>
-                <Label [text]="averageData?.ProfitLost"></Label>
-            </StackLayout>
+                <StackLayout row="2" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                    <Label text="Cost: " textWrap="true"></Label>
+                    <Label [text]="averageData?.Cost"></Label>
+                </StackLayout>
 
-            <StackLayout row="5" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
-                <Label text="avgROI: " textWrap="true"></Label>
-                <Label [text]="avgROI"></Label>
-            </StackLayout>
+                <StackLayout row="3" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                    <Label text="Margin: " textWrap="true"></Label>
+                    <Label [text]="averageData?.Margin"></Label>
+                </StackLayout>
 
-            <ActivityIndicator rowSpan="8" [busy]="processing"></ActivityIndicator>
+                <StackLayout row="4" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                    <Label text="ProfitLost: " textWrap="true"></Label>
+                    <Label [text]="averageData?.ProfitLost"></Label>
+                </StackLayout>
 
-        </GridLayout>
-        <Button class="btn btn-primary" [isEnabled]="!processing" text="Update report!" (tap)="onTap($event)"></Button>
-    </StackLayout>
-</FlexboxLayout>
+                <StackLayout row="5" col="0" class="list-item-title" orientation="horizontal" verticalAlignment="center" horizontalAlignment="left">
+                    <Label text="avgROI: " textWrap="true"></Label>
+                    <Label [text]="avgROI"></Label>
+                </StackLayout>
+
+                <ActivityIndicator rowSpan="8" [busy]="processing"></ActivityIndicator>
+
+            </GridLayout>
+            <Button class="btn btn-primary" [isEnabled]="!processing" text="Update report!" (tap)="onTap($event)"></Button>
+        </StackLayout>
+    </ScrollView>
+</GridLayout>
