@@ -5,6 +5,7 @@ import * as appSettings from "tns-core-modules/application-settings";
 import { Report } from "~/app/shared/reports/reports.model";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: "ns-reports-setting",
@@ -129,8 +130,8 @@ export class ReportsSettingComponent implements OnInit {
       title: report.title,
       description: report.description,
       date_range: report.date_range,
-      date_max: report.date_max,
-      date_min: report.date_min,
+      date_max: this.modifyDataToNormalFormat(report.date_max),
+      date_min: this.modifyDataToNormalFormat(report.date_min),
       is_notify: !!+report.is_notify
     };
   }
@@ -175,5 +176,14 @@ export class ReportsSettingComponent implements OnInit {
     const pullRefresh = args.object;
     this.getingReportData(this.token, this.projectId, this.reportID, pullRefresh);
   }
+
+  modifyDataToNormalFormat(dateNum) {
+    const year  = dateNum.slice(0, 4);
+    const month = dateNum.slice(4, 6);
+    const day   = dateNum.slice(6, 8);
+    const dateSec = Date.parse(`${year}-${month}-${day}`);
+    return dateSec;
+  }
+
 
 }
