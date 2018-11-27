@@ -130,8 +130,8 @@ export class ReportsSettingComponent implements OnInit {
       title: report.title,
       description: report.description,
       date_range: report.date_range,
-      date_max: this.modifyDataToNormalFormat(report.date_max),
       date_min: this.modifyDataToNormalFormat(report.date_min),
+      date_max: this.modifyDataToNormalFormat(report.date_max),
       is_notify: !!+report.is_notify
     };
   }
@@ -153,6 +153,7 @@ export class ReportsSettingComponent implements OnInit {
     //   res['hidden'] = this.hiddenField;
     // }
 
+    // date save
     this.isLoading = true;
 
     const data: any = {};
@@ -162,6 +163,8 @@ export class ReportsSettingComponent implements OnInit {
     data.title = this.dataForEdit["title"];
     data.description = this.dataForEdit["description"];
     data.is_notify = this.dataForEdit["is_notify"];
+    data.date_min = this.modifyDataToStringFormat(this.dataForEdit['date_min']);
+    data.date_max = this.modifyDataToStringFormat(this.dataForEdit['date_max']);
 
     // this.myCommitDataFormComp.dataForm.commitAll();
     this.reportsService.updateReport(data).subscribe((result) => {
@@ -177,6 +180,7 @@ export class ReportsSettingComponent implements OnInit {
     this.getingReportData(this.token, this.projectId, this.reportID, pullRefresh);
   }
 
+  // from "20180521" to timestamp(sec)
   modifyDataToNormalFormat(dateNum) {
     const year  = dateNum.slice(0, 4);
     const month = dateNum.slice(4, 6);
@@ -185,5 +189,13 @@ export class ReportsSettingComponent implements OnInit {
     return dateSec;
   }
 
+  // from timestamp(sec) to "20180521"
+  modifyDataToStringFormat(timestamp) {
+    const date = new Date(timestamp);
+    const year = date.getFullYear();
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + (date.getDate())).slice(-2);
+    return `${year}${month}${day}`;
+  }
 
 }
