@@ -5,7 +5,23 @@ import * as appSettings from "tns-core-modules/application-settings";
 import { Report } from "~/app/shared/reports/reports.model";
 import { ReportsService } from "~/app/shared/reports/reports.service";
 import { RadDataFormComponent } from "nativescript-ui-dataform/angular";
-import { formatDate } from '@angular/common';
+
+const DATA_RANGE = [
+  "TODAY",
+  "YESTERDAY",
+  "LAST_7_DAYS",
+  "LAST_WEEK",
+  "LAST_BUSINESS_WEEK",
+  "THIS_MONTH",
+  "LAST_MONTH",
+  "ALL_TIME",
+  "LAST_14_DAYS",
+  "LAST_30_DAYS",
+  "THIS_WEEK_SUN_TODAY",
+  "THIS_WEEK_MON_TODAY",
+  "LAST_WEEK_SUN_SAT",
+  "CUSTOM_DATE"
+]
 
 @Component({
   selector: "ns-reports-setting",
@@ -37,44 +53,58 @@ export class ReportsSettingComponent implements OnInit {
     [
       {
           name: "title",
-          displayName: "Title",
-          index: 0,
+          displayName: "Название отчета:",
+          index: 1,
           required: true,
           editor: "Text",
           validators: [
               { "name": "NonEmpty" },
               { "name": "MaximumLength", "params": { "length": 10 } }
-          ]
+          ],
+          groupName: "Общие данные",
       },
       {
           name: "description",
-          displayName: "Description",
-          index: 1,
+          displayName: "Описание:",
+          index: 2,
           editor: "MultilineText",
+          groupName: "Общие данные",
+      },
+      {
+          name: "email_notify",
+          displayName: "Email for Notify",
+          index: 1,
+          editor: "Email",
+          groupName: "Обновления"
       },
       {
           name: "date_range",
-          displayName: "date_range",
+          displayName: "Date Range",
           index: 2,
-          editor: "Text",
+          editor: "Picker",
+          valuesProvider: DATA_RANGE,
+          groupName: "Обновления",
       },
       {
           name: "date_min",
           displayName: "Date Min",
           index: 3,
-          editor: "DatePicker"
+          editor: "DatePicker",
+          groupName: "Обновления"
       },
       {
           name: "date_max",
           displayName: "Date Max",
           index: 4,
-          editor: "DatePicker"
+          editor: "DatePicker",
+          groupName: "Обновления"
       },
       {
           name: "is_notify",
-          displayName: "Email Notify",
+          displayName: "Отправлять оповещения?",
           index: 5,
-          editor: "Switch"
+          editor: "Switch",
+          groupName: "Обновления"
       },
     ]
   };
@@ -129,6 +159,7 @@ export class ReportsSettingComponent implements OnInit {
     this.dataForEdit = {
       title: report.title,
       description: report.description,
+      email_notify: report.email_notify,
       date_range: report.date_range,
       date_min: this.modifyDataToNormalFormat(report.date_min),
       date_max: this.modifyDataToNormalFormat(report.date_max),
@@ -163,6 +194,8 @@ export class ReportsSettingComponent implements OnInit {
     data.title = this.dataForEdit["title"];
     data.description = this.dataForEdit["description"];
     data.is_notify = this.dataForEdit["is_notify"];
+    data.email_notify = this.dataForEdit["email_notify"];
+    data.date_range = this.dataForEdit["date_range"];
     data.date_min = this.modifyDataToStringFormat(this.dataForEdit['date_min']);
     data.date_max = this.modifyDataToStringFormat(this.dataForEdit['date_max']);
 
