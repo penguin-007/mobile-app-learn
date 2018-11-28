@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 
+var accelerometer = require("nativescript-accelerometer");
+
+
 @Component({
     selector: "Browse",
     moduleId: module.id,
@@ -12,5 +15,14 @@ export class BrowseComponent implements OnInit {
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
+        console.log('2');
+    }
+
+    awdawdawd() {
+        
+        console.log('2fthft');
+        accelerometer.startAccelerometerUpdates(function(data) {
+            console.log("x: " + data.x + "y: " + data.y + "z: " + data.z);
+        }, { sensorDelay: "ui" });
     }
 }

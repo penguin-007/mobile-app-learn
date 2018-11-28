@@ -12,5 +12,6 @@ export class SearchComponent implements OnInit {
 
     ngOnInit(): void {
         // Use the "ngOnInit" handler to initialize data for the view.
+        console.log('3');
     }
 }

@@ -24,6 +24,7 @@
     "@angular/platform-browser": "~7.0.0",
     "@angular/platform-browser-dynamic": "~7.0.0",
     "@angular/router": "~7.0.0",
+    "nativescript-accelerometer": "2.0.1",
     "nativescript-angular": "~7.0.0",
     "nativescript-theme-core": "~1.0.4",
     "nativescript-ui-listview": "3.8.0",
