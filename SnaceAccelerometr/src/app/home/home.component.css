@@ -1,0 +1,12 @@
+.main_canvas {
+    width: 300;
+    height: 300;
+    border-width: 2;
+    border-color: red;
+}
+.box {
+    height: 30;
+    width: 30;
+    background: #ccc;
+    border-radius: 50%;
+}

@@ -1,8 +1,11 @@
 <ActionBar class="action-bar">
-    <Label class="action-bar-title" text="Homew"></Label>
+    <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<GridLayout class="page" (tap)="start()" >
-    <!-- Add your page content here -->
-    <Label class="action-bar-title" [text]="xCord"></Label>
-</GridLayout>
+<!-- <GridLayout class="main_canvas" (tap)="start()" >
+    <Label class="box" [text]="xCord"></Label>
+</GridLayout> -->
+
+<AbsoluteLayout class="main_canvas"  (tap)="start()" >
+    <Label class="box" [text]="" [top]="yCord" [left]="xCord" ></Label>
+</AbsoluteLayout>
