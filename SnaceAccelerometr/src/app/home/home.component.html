@@ -2,10 +2,11 @@
     <Label class="action-bar-title" text="Home"></Label>
 </ActionBar>
 
-<!-- <GridLayout class="main_canvas" (tap)="start()" >
-    <Label class="box" [text]="xCord"></Label>
-</GridLayout> -->
+<GridLayout rows="auto, *">
+    <Label row="0" class="" text="" ></Label>
+    <AbsoluteLayout row="1" class="main_canvas"  (tap)="start()" >
+        <Label class="box" [text]="" [top]="yCord" [left]="xCord" ></Label>
+        <Label class="food" [top]="foodYCord" [left]="foodXCord" ></Label>
+    </AbsoluteLayout>
+</GridLayout>
 
-<AbsoluteLayout class="main_canvas"  (tap)="start()" >
-    <Label class="box" [text]="" [top]="yCord" [left]="xCord" ></Label>
-</AbsoluteLayout>

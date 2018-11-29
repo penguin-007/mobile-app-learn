@@ -10,3 +10,10 @@
     background: #ccc;
     border-radius: 50%;
 }
+
+.food {
+    height: 30;
+    width: 30;
+    background:red;
+    border-radius: 50%;
+}
