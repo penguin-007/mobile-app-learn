@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { Routes } from "@angular/router";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import { CanvasComponent } from "./canvas/canvas.component";
+import { MainComponent } from "./main/main.component";
 
 
 const routes: Routes = [
-    { path: "", component: CanvasComponent }
+    { path: "", component: MainComponent }
 ];
 
 @NgModule({

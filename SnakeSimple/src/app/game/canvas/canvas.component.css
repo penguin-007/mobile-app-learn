@@ -1,1 +1,7 @@
-/* Add mobile styles for the component here.  */
+.canvas {
+    width: 300;
+    height: 300;
+    border-width: 1;
+    border-color: blue;
+    background-color: blueviolet;
+}
