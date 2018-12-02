@@ -6,12 +6,14 @@ import { GameRoutingModule } from './game.routing.module';
 import { CanvasComponent } from './canvas/canvas.component';
 import { MainComponent } from './main/main.component';
 import { KeyBoardComponent } from './keyboard/keyboard.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     CanvasComponent,
     MainComponent,
-    KeyBoardComponent
+    KeyBoardComponent,
+    HeaderComponent
   ],
   imports: [
     NativeScriptCommonModule,
