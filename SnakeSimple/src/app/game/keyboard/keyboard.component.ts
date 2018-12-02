@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ns-keyboard',
@@ -10,25 +10,27 @@ export class KeyBoardComponent implements OnInit {
 
   constructor() { }
 
+  @Output() changeDirection: EventEmitter<any> = new EventEmitter();
+
   ngOnInit() {
   }
 
   /* CHANGE DIRECTION */
 
   directionUp() {
-    console.log('directionUp');
+    this.changeDirection.emit('up');
   }
 
   directionLeft() {
-    console.log('directionLeft');
+    this.changeDirection.emit('left');
   }
 
   directionRight() {
-    console.log('directionRight');
+    this.changeDirection.emit('right');
   }
 
   directionDown() {
-    console.log('directionDown');
+    this.changeDirection.emit('down');
   }
 
 }

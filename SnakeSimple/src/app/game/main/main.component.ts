@@ -14,7 +14,11 @@ export class MainComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-      console.log('main load');
+    console.log('main load');
+  }
+
+  changeDirection(event) {
+    console.log('changeDirection', event);
   }
 
 }

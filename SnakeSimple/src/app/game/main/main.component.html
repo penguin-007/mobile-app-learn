@@ -6,6 +6,6 @@
         <ns-canvas ></ns-canvas>
     </StackLayout>
     <StackLayout row="2">
-        <ns-keyboard></ns-keyboard>
+        <ns-keyboard (changeDirection)="changeDirection($event)" ></ns-keyboard>
     </StackLayout>
 </GridLayout>
