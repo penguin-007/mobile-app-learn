@@ -16,7 +16,6 @@ export class KeyBoardComponent implements OnInit {
   }
 
   /* CHANGE DIRECTION */
-
   directionUp() {
     this.changeDirection.emit('up');
   }

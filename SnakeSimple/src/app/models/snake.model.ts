@@ -32,7 +32,16 @@ export class Snake {
     move(): void {
         switch (this.direction) {
             case 'left':
+                this.headX -= this.step;
+                break;
+            case 'right':
                 this.headX += this.step;
+                break;
+            case 'up':
+                this.headY -= this.step;
+                break;
+            case 'down':
+                this.headY += this.step;
                 break;
             default:
                 break;
@@ -40,13 +49,13 @@ export class Snake {
     }
 
     // 
-    moveEnd(): void {
+    restart(): void {
         this.headX = this.startPositionX;
         this.headY = this.startPositionY;
     }
 
-    moveDirection(direstion: String): void {
-
+    setDirection(direction: String): void {
+        this.direction = direction;
     }
 
     setStartPosition(x, y) {

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Snake } from '~/app/models/snake.model';
 
 import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-meter";
+import { CanvasComponent } from '../canvas/canvas.component';
 
 @Component({
   selector: 'ns-main',
@@ -10,6 +11,8 @@ import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-m
   moduleId: module.id,
 })
 export class MainComponent implements OnInit {
+  
+  @ViewChild('canvasListener') canvasListener: CanvasComponent;
 
   constructor() { }
 
@@ -17,8 +20,8 @@ export class MainComponent implements OnInit {
     console.log('main load');
   }
 
-  changeDirection(event) {
-    console.log('changeDirection', event);
+  changeDirection(direction) {
+    this.canvasListener.changeDirection(direction);
   }
 
 }

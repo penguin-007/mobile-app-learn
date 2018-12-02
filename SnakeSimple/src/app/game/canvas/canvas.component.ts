@@ -13,7 +13,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   snake: Snake;
 
-  fps = 1000 / 1; // frame per second
+  fps = 1000 / 2; // frame per second
   intervalId;
 
   gameRuned: Boolean;
@@ -50,6 +50,10 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   canvasEnd() {
     clearInterval(this.intervalId);
+  }
+
+  changeDirection(direction: String) {
+    this.snake.setDirection(direction);
   }
 
 }
