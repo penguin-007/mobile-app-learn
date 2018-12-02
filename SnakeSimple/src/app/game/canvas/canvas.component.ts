@@ -13,8 +13,11 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   snake: Snake;
 
-  fps = 1000 / 2; // frame per second
+  fps = 1000 / 3; // frame per second
   intervalId;
+
+  canvasWidth = 300;
+  canvasHeight = 300;
 
   gameRuned: Boolean;
 
@@ -23,7 +26,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.snake = new Snake;
+    this.snake = new Snake(this.canvasWidth, this.canvasHeight);
   }
 
   ngOnDestroy() {

@@ -15,7 +15,13 @@ export class Snake {
     direction: String;
     step: number;
 
-    constructor() {
+    canvasWidth;
+    canvasHeight;
+
+    // проход через стену возвращяет на другой конец поля
+    infinite = true;
+
+    constructor(canvasWidth, canvasHeight) {
         this.length = 0;
         this.radius = 10;
 
@@ -24,28 +30,17 @@ export class Snake {
         this.headX = this.startPositionX;
         this.headY = this.startPositionY;
 
-        this.direction = 'left';
+        this.direction = 'right';
         this.step = this.radius * 2;
+
+        this.canvasHeight = canvasHeight;
+        this.canvasWidth = canvasWidth;
     }
 
     // 
     move(): void {
-        switch (this.direction) {
-            case 'left':
-                this.headX -= this.step;
-                break;
-            case 'right':
-                this.headX += this.step;
-                break;
-            case 'up':
-                this.headY -= this.step;
-                break;
-            case 'down':
-                this.headY += this.step;
-                break;
-            default:
-                break;
-        }
+        const nextCoordinates = this.nextStep(this.headX, this.headY);
+        this.checkBoundaries(nextCoordinates);
     }
 
     // 
@@ -61,6 +56,52 @@ export class Snake {
     setStartPosition(x, y) {
         this.startPositionX = x - this.radius;
         this.startPositionY = y - this.radius;
+    }
+
+    checkBoundaries(nextCoordinates) {
+        if (nextCoordinates.x >= 0 && nextCoordinates.x <= this.canvasWidth - this.radius * 2) {
+            this.headX = nextCoordinates.x;
+        } else {
+            if (this.infinite) {
+                if (nextCoordinates.x < 0) {
+                    this.headX = this.canvasWidth - this.radius * 2;
+                } else {
+                    this.headX = 0;
+                }
+            }
+        }
+
+        if (nextCoordinates.y >= 0 && nextCoordinates.y <= this.canvasHeight - this.radius * 2) {
+            this.headY = nextCoordinates.y;
+        } else {
+            if (this.infinite) {
+                if (nextCoordinates.y < 0) {
+                    this.headY = this.canvasHeight - this.radius * 2;
+                } else {
+                    this.headY = 0;
+                }
+            }
+        }
+    }
+
+    nextStep(x, y): Object {
+        switch (this.direction) {
+            case 'left':
+                x -= this.step;
+                break;
+            case 'right':
+                x += this.step;
+                break;
+            case 'up':
+                y -= this.step;
+                break;
+            case 'down':
+                y += this.step;
+                break;
+            default:
+                break;
+        }
+        return {x, y};
     }
 
 
