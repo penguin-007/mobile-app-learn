@@ -1,3 +1,5 @@
 <AbsoluteLayout class="canvas" (tap)="startGame()" [width]="canvasWidth" [height]="canvasHeight" >
     <Label class="snakeHead" [top]="snake.headY" [left]="snake.headX" ></Label>
+
+    <Label *ngFor="let part of snake.tailParts" class="snakePart" [top]="part.y" [left]="part.x" ></Label>
 </AbsoluteLayout>

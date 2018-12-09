@@ -13,7 +13,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   snake: Snake;
 
-  fps = 1000 / 3; // frame per second
+  fps = 1000 / 4; // frame per second
   intervalId;
 
   canvasWidth = 300;

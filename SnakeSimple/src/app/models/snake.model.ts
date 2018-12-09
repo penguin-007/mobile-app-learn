@@ -18,17 +18,23 @@ export class Snake {
     canvasWidth;
     canvasHeight;
 
+    tail: Tail;
+    tailParts;
+
     // проход через стену возвращяет на другой конец поля
     infinite = true;
 
     constructor(canvasWidth, canvasHeight) {
-        this.length = 0;
-        this.radius = 10;
+        this.length = 10;
+        this.radius = 6;
 
         this.setStartPosition(150, 150);
 
         this.headX = this.startPositionX;
         this.headY = this.startPositionY;
+
+        this.tail = new Tail(this.length, this.radius);
+        this.tailParts = this.tail.renderTall(this.headX, this.headY);
 
         this.direction = 'right';
         this.step = this.radius * 2;
@@ -40,6 +46,8 @@ export class Snake {
     // 
     move(): void {
         const nextCoordinates = this.nextStep(this.headX, this.headY);
+        this.tailParts = this.tail.replaceTail(this.headX, this.headY);
+
         this.checkBoundaries(nextCoordinates);
     }
 
@@ -104,5 +112,51 @@ export class Snake {
         return {x, y};
     }
 
+}
+
+
+export class Tail {
+
+    length;
+    radius;
+
+    tail = [];
+
+    constructor(length, radius) {
+        this.length = length;
+        this.radius = radius;
+    }
+
+    renderTall(headX, headY) {
+        for (let i = 0; i < this.length; i++) {
+            if (i === 0) {
+                this.tail.push({
+                    i: i,
+                    x: headX - this.radius * 2,
+                    y: headY
+                });
+            } else {
+                this.tail.push({
+                    i: i,
+                    x: this.tail[i-1].x - this.radius * 2,
+                    y: headY
+                });
+            }
+        }
+        return this.tail;
+    }
+
+    replaceTail(headX, headY) {
+        for (let i = this.tail.length - 1; i >= 0; i--) {
+            if (i === 0) {
+                this.tail[i].x = headX;
+                this.tail[i].y = headY;
+            } else {
+                this.tail[i].x = this.tail[i-1].x;
+                this.tail[i].y = this.tail[i-1].y;
+            }
+        }
+        return this.tail;
+    }
 
 }
