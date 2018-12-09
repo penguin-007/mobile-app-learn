@@ -6,11 +6,15 @@
     width: 12;
     height: 12;
     background-color: brown;
-    z-index: 100;
+    border-width: 1;
+    border-color: black;
+    z-index: 10;
 }
 
 .snakePart {
     width: 12;
     height: 12;
     background-color: green;
+    border-width: 1;
+    border-color: black;
 }

@@ -24,14 +24,11 @@ export class Snake {
     // проход через стену возвращяет на другой конец поля
     infinite = true;
 
-    constructor(canvasWidth, canvasHeight) {
-        this.length = 10;
+    constructor(options: Object) {
+        this.length = 3;
         this.radius = 6;
 
-        this.setStartPosition(150, 150);
-
-        this.headX = this.startPositionX;
-        this.headY = this.startPositionY;
+        this.setStartPosition(options['startPosX'], options['startPosY']);
 
         this.tail = new Tail(this.length, this.radius);
         this.tailParts = this.tail.renderTall(this.headX, this.headY);
@@ -39,8 +36,8 @@ export class Snake {
         this.direction = 'right';
         this.step = this.radius * 2;
 
-        this.canvasHeight = canvasHeight;
-        this.canvasWidth = canvasWidth;
+        this.canvasHeight = options["canvasHeight"];
+        this.canvasWidth = options["canvasWidth"];
     }
 
     // 
@@ -64,6 +61,9 @@ export class Snake {
     setStartPosition(x, y) {
         this.startPositionX = x - this.radius;
         this.startPositionY = y - this.radius;
+        
+        this.headX = this.startPositionX;
+        this.headY = this.startPositionY;
     }
 
     checkBoundaries(nextCoordinates) {
@@ -157,6 +157,14 @@ export class Tail {
             }
         }
         return this.tail;
+    }
+
+    addPart() {
+        this.tail.push({
+            i: this.tail.length + 1,
+            x: this.tail[this.tail.length - 1].x,
+            y: this.tail[this.tail.length - 1].y
+        });
     }
 
 }
