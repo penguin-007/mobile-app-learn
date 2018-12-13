@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Snake } from '~/app/models/snake.model';
 
 import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-meter";
@@ -11,7 +11,10 @@ import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-m
 })
 export class CanvasComponent implements OnInit, OnDestroy {
 
+  @Input()
   snake: Snake;
+
+  @Output() onChangeLength: EventEmitter<any> = new EventEmitter();
 
   fps = 1000 / 5; // frame per second
   intervalId;
@@ -21,19 +24,12 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   gameRuned: Boolean;
 
-  options = {
-    canvasWidth: this.canvasWidth,
-    canvasHeight: this.canvasHeight,
-    startPosX: 150,
-    startPosY: 150,
-  }
-
   constructor() {
     this.gameRuned = false;
   }
 
   ngOnInit() {
-    this.snake = new Snake(this.options);
+    this.onChangeLengthEmit();
   }
 
   ngOnDestroy() {
@@ -45,7 +41,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
       this.canvasStart();
       this.gameRuned = true;
     }
-    this.snake.tail.addPart();
+    this.addPartLength();
   }
 
   endGame() {
@@ -65,6 +61,15 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   changeDirection(direction: String) {
     this.snake.setDirection(direction);
+  }
+
+  addPartLength() {
+    this.snake.tail.addPart();
+    this.onChangeLengthEmit();
+  }
+
+  onChangeLengthEmit() {
+    this.onChangeLength.emit(this.snake.tail.length);
   }
 
 }

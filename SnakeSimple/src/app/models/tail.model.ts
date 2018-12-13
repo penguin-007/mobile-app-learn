@@ -51,6 +51,7 @@ export class Tail {
             x: this.tail[this.tail.length - 1].x,
             y: this.tail[this.tail.length - 1].y
         });
+        this.length++;
     }
 
 }

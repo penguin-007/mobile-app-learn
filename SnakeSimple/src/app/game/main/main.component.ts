@@ -3,6 +3,7 @@ import { Snake } from '~/app/models/snake.model';
 
 import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-meter";
 import { CanvasComponent } from '../canvas/canvas.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'ns-main',
@@ -13,15 +14,29 @@ import { CanvasComponent } from '../canvas/canvas.component';
 export class MainComponent implements OnInit {
   
   @ViewChild('canvasListener') canvasListener: CanvasComponent;
+  @ViewChild('headerListener') headerListener: HeaderComponent;
+
+  options = {
+    canvasWidth: 300,
+    canvasHeight: 300,
+    startPosX: 150,
+    startPosY: 150,
+  }
+
+  snake: Snake;
 
   constructor() { }
 
   ngOnInit() {
-    console.log('main load');
+    this.snake = new Snake(this.options);
   }
 
   changeDirection(direction) {
     this.canvasListener.changeDirection(direction);
+  }
+
+  onChangeLength(length) {
+    this.headerListener.updateLength(length);
   }
 
 }

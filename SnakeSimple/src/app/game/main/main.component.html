@@ -1,9 +1,9 @@
 <GridLayout rows="auto, auto, *" columns="*" class="main_holder" >
     <StackLayout row="0">
-        <ns-header></ns-header>
+        <ns-header #headerListener ></ns-header>
     </StackLayout>
     <StackLayout row="1">
-        <ns-canvas #canvasListener ></ns-canvas>
+        <ns-canvas #canvasListener [snake]="snake" (onChangeLength)="onChangeLength($event)" ></ns-canvas>
     </StackLayout>
     <StackLayout row="2">
         <ns-keyboard (changeDirection)="changeDirection($event)" ></ns-keyboard>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ns-header',
@@ -7,10 +7,22 @@ import { Component, OnInit } from '@angular/core';
   moduleId: module.id,
 })
 export class HeaderComponent implements OnInit {
+  
+  score: number;
+  level: number;
+  length: number;
 
-  constructor() { }
+  constructor() {
+    this.score = 0;
+    this.level = 1;
+    this.length = 0;
+  }
 
   ngOnInit() {
+  }
+
+  updateLength(length) {
+    this.length = length + 1;
   }
 
 }
