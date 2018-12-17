@@ -16,7 +16,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   @Output() onChangeLength: EventEmitter<any> = new EventEmitter();
 
-  fps = 1000 / 5; // frame per second
+  fps = 1000 / 4; // frame per second
   intervalId;
 
   canvasWidth = 300;
