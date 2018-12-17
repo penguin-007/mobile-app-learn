@@ -1,6 +1,6 @@
 .canvas {
     background-color: #ccc;
-    background-image: url('res://grass');
+    background-image: url('res://grass'); 
 }
 
 .snakeHead {
