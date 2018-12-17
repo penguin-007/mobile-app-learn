@@ -27,7 +27,7 @@ export class Snake {
 
     constructor(options: Object) {
         this.length = 3;
-        this.radius = 6;
+        this.radius = 10;
 
         this.setStartPosition(options['startPosX'], options['startPosY']);
 
