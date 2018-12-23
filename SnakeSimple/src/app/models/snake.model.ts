@@ -25,11 +25,11 @@ export class Snake {
     // проход через стену возвращяет на другой конец поля
     infinite = true;
 
-    constructor(options: Object) {
+    constructor(options: any) {
         this.length = 3;
-        this.radius = 10;
+        this.radius = options.radius;
 
-        this.setStartPosition(options['startPosX'], options['startPosY']);
+        this.setStartPosition(options.startPosX, options.startPosY);
 
         this.tail = new Tail(this.length, this.radius);
         this.tailParts = this.tail.renderTall(this.headX, this.headY);
@@ -37,8 +37,8 @@ export class Snake {
         this.direction = 'right';
         this.step = this.radius * 2;
 
-        this.canvasHeight = options["canvasHeight"];
-        this.canvasWidth = options["canvasWidth"];
+        this.canvasHeight = options.canvasHeight;
+        this.canvasWidth = options.canvasWidth;
     }
 
     // 

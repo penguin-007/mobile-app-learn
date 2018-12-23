@@ -2,4 +2,6 @@
     <Label class="snakeHead {{snake.direction}}" [top]="snake.headY" [left]="snake.headX" ></Label>
 
     <Label *ngFor="let part of snake.tailParts" class="snakePart" [top]="part.y" [left]="part.x" ></Label>
+
+    <Label class="food" [top]="food.posY" [left]="food.posX" ></Label>
 </AbsoluteLayout>

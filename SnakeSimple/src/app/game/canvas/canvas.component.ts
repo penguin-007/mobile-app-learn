@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { Snake } from '~/app/models/snake.model';
+// import { Snake } from '~/app/models/snake.model';
 
 import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-meter";
 
@@ -11,8 +11,8 @@ import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-m
 })
 export class CanvasComponent implements OnInit, OnDestroy {
 
-  @Input()
-  snake: Snake;
+  @Input() snake;
+  @Input() food;
 
   @Output() onChangeLength: EventEmitter<any> = new EventEmitter();
 
@@ -42,6 +42,8 @@ export class CanvasComponent implements OnInit, OnDestroy {
       this.gameRuned = true;
     }
     this.addPartLength();
+
+    this.food.setNewPosition();
   }
 
   endGame() {
