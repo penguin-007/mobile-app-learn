@@ -20,7 +20,7 @@ export class Food {
     this.setNewPosition();
   }
 
-  getRandomCoordinates(min, max) {
+  protected getRandomCoordinates(min, max) {
     const random = Math.floor(Math.random() * max) + min;
     return random - (random % (this.radius * 2));
   }

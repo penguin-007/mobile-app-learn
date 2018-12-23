@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-// import { Snake } from '~/app/models/snake.model';
+
+import { Snake } from '~/app/models/snake.model';
+import { Food } from '~/app/models/food.model';
 
 import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-meter";
 
@@ -11,8 +13,8 @@ import { removeCallback, start, stop, addCallback } from "tns-core-modules/fps-m
 })
 export class CanvasComponent implements OnInit, OnDestroy {
 
-  @Input() snake;
-  @Input() food;
+  @Input() snake: Snake;
+  @Input() food: Food;
 
   @Output() onChangeLength: EventEmitter<any> = new EventEmitter();
 
@@ -41,9 +43,6 @@ export class CanvasComponent implements OnInit, OnDestroy {
       this.canvasStart();
       this.gameRuned = true;
     }
-    this.addPartLength();
-
-    this.food.setNewPosition();
   }
 
   endGame() {
@@ -54,6 +53,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
   canvasStart() {
     this.intervalId = setInterval(() => {
       this.snake.move();
+      this.ifHeadEatFood(this.snake.headX, this.snake.headY, this.food.posX, this.food.posY);
     }, this.fps);
   }
 
@@ -68,10 +68,18 @@ export class CanvasComponent implements OnInit, OnDestroy {
   addPartLength() {
     this.snake.tail.addPart();
     this.onChangeLengthEmit();
-  }
+  } 
 
   onChangeLengthEmit() {
     this.onChangeLength.emit(this.snake.tail.length);
+  }
+
+  ifHeadEatFood(snakeHeadX, snakeHeadY, foodX, foodY) {
+    // console.log(snakeHeadX, snakeHeadY, foodX, foodY);
+    if (snakeHeadX === foodX && snakeHeadY === foodY) {
+      this.food.setNewPosition();
+      this.addPartLength();
+    }
   }
 
 }
