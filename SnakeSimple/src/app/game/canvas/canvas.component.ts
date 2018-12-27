@@ -18,7 +18,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
 
   @Output() onChangeLength: EventEmitter<any> = new EventEmitter();
 
-  fps = 1000 / 4; // frame per second
+  fps = 1000 / 5; // frame per second
   intervalId;
 
   canvasWidth = 300;
@@ -77,7 +77,7 @@ export class CanvasComponent implements OnInit, OnDestroy {
   ifHeadEatFood(snakeHeadX, snakeHeadY, foodX, foodY) {
     // console.log(snakeHeadX, snakeHeadY, foodX, foodY);
     if (snakeHeadX === foodX && snakeHeadY === foodY) {
-      this.food.setNewPosition();
+      this.food.setNewPosition(this.snake.tail.tail);
       this.addPartLength();
     }
   }

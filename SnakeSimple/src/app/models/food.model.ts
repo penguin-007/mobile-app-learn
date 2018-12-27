@@ -11,7 +11,9 @@ export class Food {
   posX: number;
   posY: number;
 
-  constructor(options: any) {
+  constructor(
+    options: any
+  ) {
     this.canvasHeight = options.canvasWidth;
     this.canvasWidth = options.canvasHeight;
 
@@ -20,14 +22,28 @@ export class Food {
     this.setNewPosition();
   }
 
-  protected getRandomCoordinates(min, max) {
+  private getRandomCoordinates(min, max) {
     const random = Math.floor(Math.random() * max) + min;
     return random - (random % (this.radius * 2));
   }
 
-  setNewPosition() {
-    this.posX = this.getRandomCoordinates(0, this.canvasWidth);
-    this.posY = this.getRandomCoordinates(0, this.canvasHeight);
+  setNewPosition(tail?) {
+    const posX = this.getRandomCoordinates(0, this.canvasWidth);
+    const posY = this.getRandomCoordinates(0, this.canvasHeight);
+
+    if (tail) {
+      const findResult = tail.find((item) => {
+        return item.x === posX && item.y === posY;
+      });
+      if (findResult) {
+        this.setNewPosition(tail);
+        return;
+      }
+    } 
+
+    this.posX = posX;
+    this.posY = posY;
+
     console.log('getRandomCoordinates', this.posX, this.posY);
   }
 
